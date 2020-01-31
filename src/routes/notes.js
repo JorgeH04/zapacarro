@@ -22,7 +22,7 @@ router.get('/notes/add',  async (req, res) => {
 
 
 router.post('/notes/new-note',  async (req, res) => {
-  const { imagePath, product, price } = req.body;
+  const { imagePath, product, color, talle, colorstock, tallestock, price } = req.body;
   const errors = [];
   if (!imagePath) {
     errors.push({text: 'Please Write a Title.'});
@@ -41,13 +41,50 @@ router.post('/notes/new-note',  async (req, res) => {
       price
     });
   } else {
-    const newNote = new Note({imagePath, product, price});
+    const newNote = new Note({ imagePath, product, color, talle, colorstock, tallestock, price });
     //newNote.user = req.user.id;
     await newNote.save();
     req.flash('success_msg', 'Note Added Successfully');
     res.redirect('/notes/add');
   }
 });
+
+
+
+
+
+
+router.get('/notesredirect/:id', async (req, res) => {
+  const { id } = req.params;
+  const note = await Note.findById(id);
+  //console.log(post);
+  //res.send('recibido');
+   res.render('notes/notesredirect', {note});
+});
+
+
+
+
+
+// talle y color
+router.get('/notes/tallecolor/:id',  async (req, res) => {
+  const note = await Note.findById(req.params.id);
+  res.render('notes/tallecolor-notes', { note });
+});
+
+router.put('/notes/tallecolor/:id',  async (req, res) => {
+  const { talle, color } = req.body;
+  const note = await Note.findByIdAndUpdate(req.params.id, {talle, color});
+  req.flash('success_msg', 'Talle y Color cargados exitosamente, ya puede efectuar su compra');
+  res.redirect('/noteredirect/' + note);
+});
+
+
+
+
+
+
+
 
 // Get All Notes  {user: req.user.id}).sort({date: 'desc'}
 router.get('/notes',  async (req, res) => {

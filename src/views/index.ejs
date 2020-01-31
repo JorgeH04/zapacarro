@@ -72,7 +72,9 @@
 
           <div class="col-md-3 wow zoomInDown">
             <div class="card">
-             <img class="card-img-top img-fluid" alt="img1" src="<%= note.imagePath %>">
+                <a href="/notesredirect/<%= note.id %>">
+                   <img class="card-img-top img-fluid" alt="img1" src="<%= note.imagePath %>">
+                </a>
                 <div class="card-body">
                    <div class="card-heading"> <%= note.product %> </div>
                    <h4> $<%= note.price %>  </h4>
