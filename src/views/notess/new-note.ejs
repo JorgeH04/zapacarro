@@ -1,0 +1,65 @@
+<% include ../partials/_header %>
+
+
+<div class="col-md-4 mx-auto">
+  <div class="card text-center">
+    <div class="card-header">
+      <h3>New Note</h3>
+    </div>
+    <div class="card-body">
+      <form action="/notes/new-note" method="POST">
+        <div class="form-group">
+          <input type="text" name="imagePath" class="form-control" placeholder="image" autofocus/>
+        </div>
+       <div class="form-group">
+          <input type="text" name="product" class="form-control" placeholder="product" autofocus/>
+        </div>
+        <div class="form-group">
+          <input type="number" name="price" class="form-control" placeholder="price" autofocus/>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary btn-block" type="submit">
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="container">
+          <section class="products">
+      <div class="section-title">
+        <h2>our products</h2>
+      </div>
+      <div class="products-center">
+        <!-- single product -->
+        {{#each notes}}
+        <article class="product">
+          <div class="img-container">
+            <img src="{{ imagePath }}" alt="product" class="product-img" />
+            <button class="bag-btn" data-id="1">
+                <i class="fas fa-shopping-cart"></i>
+              add to bag
+            </button>
+          </div>
+          <h3>{{ product }}</h3>
+          <h4>${{ price }}</h4>
+          <form action="/notes/delete/{{_id}}?_method=DELETE" method="POST">
+          <input type="hidden" name="_method" value="DELETE">
+          <button type="submit" class="btn btn-danger btn-block btn-sm">Delete</button>
+        </form>
+        <h4 class="card-title d-flex justify-content-between align-items-center">
+          <a href="/notes/edit/{{_id}}">Edit</a>
+        </h4>
+        </article>
+         {{/each}}
+        <!-- end of single product -->
+      </div>
+    </section>
+      </div>
+
+      <% include ../partials/_footer %>      

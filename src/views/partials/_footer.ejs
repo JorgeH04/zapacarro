@@ -1,0 +1,68 @@
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
+      <script>
+      var wow = new WOW(
+  {
+    boxClass:     'wow',      // animated element css class (default is wow)
+    animateClass: 'animated', // animation css class (default is animated)
+    offset:       0,          // distance to the element when triggering the animation (default is 0)
+    mobile:       true,       // trigger animations on mobile devices (default is true)
+    live:         true,       // act on asynchronously loaded content (default is true)
+    callback:     function(box) {
+      // the callback is fired every time an animation is started
+      // the argument that is passed in is the DOM node being animated
+    },
+    scrollContainer: null,    // optional scroll container selector, otherwise use window,
+    resetAnimation: true,     // reset animation on end (default is true)
+  }
+);
+wow.init();
+      </script>
+      
+      <script>
+       $(window).scroll(function(){
+        var scroll = $(window).scrollTop();
+        if(scroll < 900){
+            $('.fixed-top').css('background', 'transparent');
+        } else{
+            $('.fixed-top').css('background', 'rgba(255, 20, 147, 0.7)');
+        }
+    });
+      </script>
+<footer id="the-foot">
+    <div class="container-fluid pt-5 pb-5 bg-dark text-light">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+  
+              <p>Estudio Contable Ganen-Hessle.</p>
+              <p>Teléfonos: (+54 11) 4682-2869 / 15-6800-7249</p>
+              <p>e-mail: info@estudio-roldan.com.ar</p>
+              
+            </div>
+            
+            
+            <div class="col-md-6">
+  
+                <p>Av. Directorio 3833 - 7mo. Piso, Oficina "B" - C.A.B.A.</p>
+                <p>Lunes a viernes de 9:30 a 13 hs. y de 14 a 18:00 hs.</p>
+              
+            
+            
+      </div>
+  </footer>
+  
+
+            
+
+
+  </body>
+
+
+</html>
