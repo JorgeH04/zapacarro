@@ -1,17 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const Note = require('../models/Note');
+const Ofertauno = require('../models/ofertauno');
 const Ofertados = require('../models/ofertados');
 const Ofertatres = require('../models/ofertatres');
+const Cart = require('../models/cart');
 
 
 
 
 router.get('/', async (req, res) => {
-  const notes = await Note.find();
+  const ofertauno = await Ofertauno.find();
   const ofertados = await Ofertados.find();
   const ofertatres = await Ofertatres.find();
-  res.render('index', { notes, ofertados, ofertatres
+  res.render('index', { ofertauno, ofertados, ofertatres
   });
 });
 

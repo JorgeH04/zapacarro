@@ -5,7 +5,7 @@
 <div class="col-md-4 mx-auto">
   <div class="card text-center">
     <div class="card-header">
-      <h3>New Note</h3>
+      <h3>Agregue un nuevo producto</h3>
     </div>
     <div class="card-body">
       <form action="/ofertatres/new-ofertatres" method="POST">
@@ -15,6 +15,18 @@
        <div class="form-group">
           <input type="text" name="product" class="form-control" placeholder="product" autofocus/>
         </div>
+        <div class="form-group">
+            <input type="text" name="talle" class="form-control" placeholder="talle" autofocus/>
+          </div>
+                 <div class="form-group">
+            <input type="text" name="color" class="form-control" placeholder="color" autofocus/>
+          </div>
+                 <div class="form-group">
+            <input type="text" name="tallestock" class="form-control" placeholder="tallestock" autofocus/>
+          </div>
+                 <div class="form-group">
+            <input type="text" name="colorstock" class="form-control" placeholder="colorstock" autofocus/>
+          </div>
         <div class="form-group">
           <input type="number" name="price" class="form-control" placeholder="price" autofocus/>
         </div>
@@ -37,12 +49,14 @@
          <div class="col-md-4 text-center">
           
           <div class="img-container">
-              <img src="<%= ofertatres[i].imagePath %>" alt="product" class="product-img" />
+              <a href="/ofertatresbackend/<%= ofertatres[i].id %>">
+                 <img src="<%= ofertatres[i].imagePath %>" alt="product" class="product-img" />
+              </a>
             </div>
         </div>
             <h3>  <%= ofertatres[i].product %> </h3>
             <h4> <%= ofertatres[i].price %> </h4>
-            <a class="btn btn-danger" href="/ofertados/delete/<%= ofertatres[i].id %>">
+            <a class="btn btn-danger" href="/ofertatres/delete/<%= ofertatres[i].id %>">
               Eliminar
           </a>
 

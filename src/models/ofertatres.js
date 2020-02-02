@@ -10,6 +10,22 @@ const NoteSchema = new Schema({
     type: String,
     required: true
   },
+  color: {
+    type: String,
+    required: true
+  },
+  talle: {
+    type: String,
+    required: true
+  },
+  colorstock: {
+    type: String,
+    required: true
+  },
+  tallestock: {
+    type: String,
+    required: true
+  }, 
   date: {
     type: Date,
     default: Date.now
@@ -18,7 +34,6 @@ const NoteSchema = new Schema({
     type: Number,
     required: true
   }
-
 });
 
 module.exports = mongoose.model('Ofertatres', NoteSchema);

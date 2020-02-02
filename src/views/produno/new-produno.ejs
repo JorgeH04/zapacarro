@@ -1,0 +1,71 @@
+<% include ../partials/_header %>
+
+
+
+<div class="col-md-4 mx-auto">
+  <div class="card text-center">
+    <div class="card-header">
+      <h3>Agregue un nuevo producto</h3>
+    </div>
+    <div class="card-body">
+      <form action="/produno/new-produno" method="POST">
+        <div class="form-group">
+          <input type="text" name="imagePath" class="form-control" placeholder="image" autofocus/>
+        </div>
+       <div class="form-group">
+          <input type="text" name="product" class="form-control" placeholder="product" autofocus/>
+        </div>
+        <div class="form-group">
+            <input type="text" name="talle" class="form-control" placeholder="talle" autofocus/>
+          </div>
+                 <div class="form-group">
+            <input type="text" name="color" class="form-control" placeholder="color" autofocus/>
+          </div>
+                 <div class="form-group">
+            <input type="text" name="tallestock" class="form-control" placeholder="tallestock" autofocus/>
+          </div>
+                 <div class="form-group">
+            <input type="text" name="colorstock" class="form-control" placeholder="colorstock" autofocus/>
+          </div>
+        <div class="form-group">
+          <input type="number" name="price" class="form-control" placeholder="price" autofocus/>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary btn-block" type="submit">
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+  
+
+
+
+
+        <div class="row mt-5">
+          <% for(var i = 0; i < produno.length; i++) { %>
+            <div class="col-md-3 wow slideInDown">
+             <div class="card"> 
+              <a href="/produnobackend/<%= produno[i].id %>">
+                <img src="<%= produno[i].imagePath %>" alt="product" class="product-img" />
+             </a> 
+                <div class="card-body">
+                  <h3>  <%= produno[i].product %> </h3>
+                  <h4> <%= produno[i].price %> </h4>
+                  <a class="btn btn-danger" href="/produno/delete/<%= produno[i].id %>">
+                    Eliminar
+                </a>
+              </div>
+        </div>
+        <% } %>
+      
+      
+
+
+
+        <% include ../partials/_footer %>
+        

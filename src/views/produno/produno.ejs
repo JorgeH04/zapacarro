@@ -1,0 +1,26 @@
+<% include ../partials/_header %>
+
+
+
+  <div class="row mt-5">
+    <% produno.forEach(function (produn) { %>
+      <div class="col-md-3 wow slideInDown">
+       <div class="card"> 
+          <a href="/produnoredirect/<%= produn.id %>">
+         <img class="card-img-top img-fluid" alt="img1" src="<%= produn.imagePath %>">
+          </a>
+          <div class="card-body">
+        <div class="card-heading"><%= produn.product %></div>
+        <h4> $<%= produn.price %>  </h4>
+        <a class="btn btn-pink text-light"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To Cart</a> </div>
+        </div>
+  </div>
+  <% }) %>
+
+
+
+
+
+
+
+  <% include ../partials/_footer %>

@@ -1,0 +1,75 @@
+<% include ../partials/_header %>
+
+
+
+<div class="col-md-4 mx-auto">
+  <div class="card text-center">
+    <div class="card-header">
+      <h3>Agregue un nuevo producto</h3>
+    </div>
+    <div class="card-body">
+      <form action="/ofertauno/new-ofertauno" method="POST">
+        <div class="form-group">
+          <input type="text" name="imagePath" class="form-control" placeholder="image" autofocus/>
+        </div>
+       <div class="form-group">
+          <input type="text" name="product" class="form-control" placeholder="product" autofocus/>
+        </div>
+        <div class="form-group">
+            <input type="text" name="talle" class="form-control" placeholder="talle" autofocus/>
+          </div>
+                 <div class="form-group">
+            <input type="text" name="color" class="form-control" placeholder="color" autofocus/>
+          </div>
+                 <div class="form-group">
+            <input type="text" name="tallestock" class="form-control" placeholder="tallestock" autofocus/>
+          </div>
+                 <div class="form-group">
+            <input type="text" name="colorstock" class="form-control" placeholder="colorstock" autofocus/>
+          </div>
+        <div class="form-group">
+          <input type="number" name="price" class="form-control" placeholder="price" autofocus/>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary btn-block" type="submit">
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+  
+    <div class="products-center">
+            <!-- single product -->
+            <% for(var i = 0; i < ofertauno.length; i++) { %>
+              <article class="product">
+         <div class="col-md-4 text-center">
+          
+          <div class="img-container">
+              <a href="/ofertaunoredirect/<%= ofertauno[i].id %>">
+                 <img src="<%= ofertauno[i].imagePath %>" alt="product" class="product-img" />
+              </a>   
+            </div>
+        </div>
+            <h3>  <%= ofertauno[i].product %> </h3>
+            <h4> <%= ofertauno[i].price %> </h4>
+            <a class="btn btn-danger" href="/ofertauno/delete/<%= ofertauno[i].id %>">
+              Eliminar
+          </a>
+
+          </article>
+          <% } %>
+          <!-- end of single product -->
+          
+          </div>
+          </section>
+            </div>
+          </div>
+        </div>
+
+
+        <% include ../partials/_footer %>
+        

@@ -13,7 +13,7 @@ const mongoose = require('mongoose');
 const engine = require('ejs-mate');
 
 const MongoStore = require('connect-mongo')(session);
-// Initializations
+// Initializations   <%= session.cart.totalQty %>
 const app = express();
 require('./database');
 require('./config/passport');
@@ -60,9 +60,15 @@ app.use((req, res, next) => {
 // routes
 app.use(require('./routes'));
 app.use(require('./routes/users'));
-app.use(require('./routes/notes'));
+app.use(require('./routes/ofertauno'));
 app.use(require('./routes/ofertados'));
 app.use(require('./routes/ofertatres'));
+app.use(require('./routes/produno'));
+app.use(require('./routes/proddos'));
+app.use(require('./routes/prodtres'));
+app.use(require('./routes/prodcuatro'));
+app.use(require('./routes/prodcinco'));
+app.use(require('./routes/prodseis'));
 
 
 // server

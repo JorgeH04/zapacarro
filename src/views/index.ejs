@@ -2,7 +2,7 @@
 
 
 
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+<div id="carouselExampleIndicators" class="carousel slide mt-5" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
       <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -19,7 +19,7 @@
           </div> 
       </div>
       <div class="carousel-item">
-        <img src="img/calzadoportada33.jpg" class="d-block w-100" alt="...">
+        <img src="img/calzadoportada5.jpg" class="d-block w-100" alt="...">
           
           <div class="carousel-caption d-none d-md-block">
           <p class="heading animated bounceInLeft">BOOTSTRAP 4 ANIMATED CAROUSEL</p>
@@ -68,17 +68,16 @@
         </div>
         
         <div class="row mt-5">
-            <% notes.forEach(function (note) { %>
+            <% ofertauno.forEach(function (ofertaun) { %>
 
           <div class="col-md-3 wow zoomInDown">
             <div class="card">
-                <a href="/notesredirect/<%= note.id %>">
-                   <img class="card-img-top img-fluid" alt="img1" src="<%= note.imagePath %>">
+                <a href="/ofertaunoredirect/<%= ofertaun.id %>">
+                   <img class="card-img-top img-fluid" alt="img1" src="<%= ofertaun.imagePath %>">
                 </a>
                 <div class="card-body">
-                   <div class="card-heading"> <%= note.product %> </div>
-                   <h4> $<%= note.price %>  </h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit neque, mollitia dolorem. </p>
+                   <div class="card-heading"> <%= ofertaun.product %> </div>
+                   <h4> $<%= ofertaun.price %>  </h4>
                     <a class="btn btn-pink text-light"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To Cart</a>
                 </div>
             </div>
@@ -139,11 +138,13 @@
       <div class="row mt-5">
           <% ofertados.forEach(function (ofertado) { %>
             <div class="col-md-3 wow slideInDown">
-          <div class="card"> <img class="card-img-top img-fluid" alt="img1" src="<%= ofertado.imagePath %>">
+             <div class="card"> 
+                <a href="/ofertadosredirect/<%= ofertado.id %>">
+               <img class="card-img-top img-fluid" alt="img1" src="<%= ofertado.imagePath %>">
+                </a>
                 <div class="card-body">
               <div class="card-heading"><%= ofertado.product %></div>
               <h4> $<%= ofertado.price %>  </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit neque, mollitia dolorem. </p>
               <a class="btn btn-pink text-light"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To Cart</a> </div>
               </div>
         </div>
@@ -158,11 +159,13 @@
       <div class="row mt-5">
           <% ofertatres.forEach(function (ofertatre) { %>
             <div class="col-md-3 wow flipInX">
-          <div class="card"> <img class="card-img-top img-fluid" alt="img1" src="<%= ofertatre.imagePath %>">
+            <div class="card"> 
+                <a href="/ofertatresredirect/<%= ofertatre.id %>">
+                   <img class="card-img-top img-fluid" alt="img1" src="<%= ofertatre.imagePath %>">
+                </a>
                 <div class="card-body">
               <div class="card-heading"><%= ofertatre.product %></div>
               <h4> $<%= ofertatre.price %>  </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit neque, mollitia dolorem. </p>
               <a class="btn btn-pink text-light"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To Cart</a> </div>
               </div>
         </div>
@@ -172,14 +175,6 @@
             
     </div>
         
-
-
-
-
-
-
-
-
 
 
 

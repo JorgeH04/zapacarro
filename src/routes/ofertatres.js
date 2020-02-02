@@ -8,21 +8,16 @@ const router = express.Router();
 // Models
 const Ofertatres = require('../models/ofertatres');
 const Cart = require('../models/cart');
-//const Order = require('../models/Order');
+const Order = require('../models/Order');
 
 // Helpers
 const { isAuthenticated } = require('../helpers/auth');
 
-// New Note
-router.get('/ofertatres/add',  async (req, res) => {
-  const ofertatres = await Ofertatres.find();
-  res.render('ofertatres/new-ofertatres',  { ofertatres });
-});
 
 
 
 router.post('/ofertatres/new-ofertatres',  async (req, res) => {
-  const { imagePath, product, price } = req.body;
+  const { imagePath, product, color, talle, colorstock, tallestock, price } = req.body;
   const errors = [];
   if (!imagePath) {
     errors.push({text: 'Please Write a Title.'});
@@ -41,7 +36,7 @@ router.post('/ofertatres/new-ofertatres',  async (req, res) => {
       price
     });
   } else {
-    const newNote = new Ofertatres({imagePath, product, price});
+    const newNote = new Ofertatres({imagePath, product, color, talle, colorstock, tallestock, price});
     //newNote.user = req.user.id;
     await newNote.save();
     req.flash('success_msg', 'Note Added Successfully');
@@ -49,50 +44,100 @@ router.post('/ofertatres/new-ofertatres',  async (req, res) => {
   }
 });
 
-// Get All Notes  {user: req.user.id}).sort({date: 'desc'}
-router.get('/ofertatres',  async (req, res) => {
-  const notes = await Note.find();
-  res.render('notes/all-notes', { notes });
-});
 
-// Edit Notes
-router.get('/notes/edit/:id',  async (req, res) => {
-  const note = await Note.findById(req.params.id);
-  if(note.user != req.user.id) {
-    req.flash('error_msg', 'Not Authorized');
-    return res.redirect('/notes');
-  } 
-  res.render('notes/edit-note', { note });
-});
 
-router.put('/notes/edit-note/:id', isAuthenticated, async (req, res) => {
-  const { title, description } = req.body;
-  await Note.findByIdAndUpdate(req.params.id, {title, description});
-  req.flash('success_msg', 'Note Updated Successfully');
-  res.redirect('/notes');
-});
 
-// Delete Notes
-router.get('/ofertatres/delete/:id', async (req, res) => {
-  //await Note.findByIdAndDelete(req.params.id);
-  //req.flash('success_msg', 'Note Deleted Successfully');
+
+router.get('/ofertatresredirect/:id', async (req, res) => {
   const { id } = req.params;
-  await ofertatres.deleteOne({_id: id});
+  const ofertatres = await Ofertatres.findById(id);
+  //console.log(post);
+  //res.send('recibido');
+   res.render('ofertatres/ofertatresredirect', {ofertatres});
+});
+
+
+
+
+
+
+
+
+// New producto
+router.get('/ofertatres/add',  async (req, res) => {
+  const ofertatres = await Ofertatres.find();
+  res.render('ofertatres/new-ofertatres',  { ofertatres });
+});
+
+
+
+router.get('/ofertatresbackend/:id', async (req, res) => {
+  const { id } = req.params;
+  const ofertatres = await Ofertatres.findById(id);
+   res.render('ofertatres/ofertatresbackend', {ofertatres});
+});
+
+
+
+
+
+
+// talle y color
+router.get('/ofertatres/tallecolor/:id',  async (req, res) => {
+  const ofertatres = await Ofertatres.findById(req.params.id);
+  res.render('ofertatres/tallecolor-ofertatres', { ofertatres });
+});
+
+router.post('/ofertatres/tallecolor/:id',  async (req, res) => {
+  const { id } = req.params;
+  await Ofertatres.updateOne({_id: id}, req.body);
+  res.redirect('/ofertatresredirect/' + id);
+});
+
+
+
+
+//editar
+router.get('/ofertatres/edit/:id',  async (req, res) => {
+  const ofertatres = await Ofertatres.findById(req.params.id);
+  res.render('ofertados/edit-ofertados', { ofertados });
+});
+
+router.post('/ofertatres/edit/:id',  async (req, res) => {
+  const { id } = req.params;
+  await Ofertatres.updateOne({_id: id}, req.body);
+  res.redirect('/ofertatresbackend/' + id);
+});
+
+
+
+// Delete 
+router.get('/ofertatres/delete/:id', async (req, res) => {
+  const { id } = req.params;
+  await Ofertatres.deleteOne({_id: id});
   res.redirect('/ofertatres/add');
 });
 
-router.get('/addtocard/:id', function(req, res, next){
+
+
+
+
+
+
+
+
+router.get('/addtocardofertatres/:id', function(req, res, next){
   var productId = req.params.id;
   var cart = new Cart(req.session.cart ? req.session.cart : {items: {}});
 
-  Note.findById(productId, function(err, product){
+  Ofertatres.findById(productId, function(err, product){
     if(err){
       return res-redirect('/');
     }
     cart.add(product, product.id);
     req.session.cart = cart;
     console.log(req.session.cart);
-    res.redirect('/');
+    res.redirect('/shopcart');
 
   });
 });
@@ -121,7 +166,7 @@ router.get('/shopcart', function (req, res, next){
     return res.render('/', {products:null})
   }
   var cart = new Cart(req.session.cart);
-  res.render('notes/shopcart', {products: cart.generateArray(), totalPrice: cart.totalPrice})
+  res.render('cart/shopcart', {products: cart.generateArray(), totalPrice: cart.totalPrice})
 });
 
 
