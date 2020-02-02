@@ -41,34 +41,35 @@
 </div>
 
 
-  
-    <div class="products-center">
-            <!-- single product -->
-            <% for(var i = 0; i < proddos.length; i++) { %>
-              <article class="product">
-         <div class="col-md-4 text-center">
-          
-          <div class="img-container">
-              <a href="/proddosbackend/<%= proddos[i].id %>">
-                 <img src="<%= proddos[i].imagePath %>" alt="product" class="product-img" />
-              </a>   
-            </div>
-        </div>
-            <h3>  <%= proddos[i].product %> </h3>
-            <h4> <%= proddos[i].price %> </h4>
-            <a class="btn btn-danger" href="/proddos/delete/<%= proddos[i].id %>">
-              Eliminar
-          </a>
 
-          </article>
-          <% } %>
-          <!-- end of single product -->
-          
-          </div>
-          </section>
-            </div>
-          </div>
+
+<div class="row mt-5">
+    <% proddos.forEach(function (proddo) { %>
+      <div class="col-md-3 ">
+       <div class="card"> 
+          <a href="/proddosbackend/<%= proddo.id %>">
+         <img class="card-img-top img-fluid" alt="img1" src="<%= proddo.imagePath %>">
+          </a>
+          <div class="card-body">
+        <div class="card-heading"><%= proddo.product %></div>
+        <h4> $<%= proddo.price %>  </h4>
+        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit neque, mollitia dolorem. </p>
+        <a class="btn btn-pink text-light"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To Cart</a> </div>
+        <a class="btn btn-danger" href="/proddos/delete/<%= proddo.id %>">
+          Eliminar
+      </a>
         </div>
+  </div>
+  <% }) %>
+
+
+</div>
+     
+</div>
+</div>
+
+
+
 
 
         <% include ../partials/_footer %>

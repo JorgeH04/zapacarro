@@ -81,7 +81,7 @@ router.get('/produno/add',  async (req, res) => {
 router.get('/produnobackend/:id', async (req, res) => {
   const { id } = req.params;
   const produno = await Produno.findById(id);
-   res.render('produno/produnoredirect', {produno});
+   res.render('produno/produnobackend', {produno});
 });
 
 

@@ -41,28 +41,33 @@
 </div>
 
 
-  
-
-
-
-
-        <div class="row mt-5">
-          <% for(var i = 0; i < produno.length; i++) { %>
-            <div class="col-md-3 wow slideInDown">
-             <div class="card"> 
-              <a href="/produnobackend/<%= produno[i].id %>">
-                <img src="<%= produno[i].imagePath %>" alt="product" class="product-img" />
-             </a> 
-                <div class="card-body">
-                  <h3>  <%= produno[i].product %> </h3>
-                  <h4> <%= produno[i].price %> </h4>
-                  <a class="btn btn-danger" href="/produno/delete/<%= produno[i].id %>">
-                    Eliminar
-                </a>
-              </div>
+<div class="row mt-5">
+    <% produno.forEach(function (produn) { %>
+      <div class="col-md-3 ">
+       <div class="card"> 
+          <a href="/produnobackend/<%= produn.id %>">
+         <img class="card-img-top img-fluid" alt="img1" src="<%= produn.imagePath %>">
+          </a>
+          <div class="card-body">
+        <div class="card-heading"><%= produn.product %></div>
+        <h4> $<%= produn.price %>  </h4>
+        <a class="btn btn-pink text-light"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To Cart</a> </div>
+        <div class="card-body">
+            <a class="btn btn-danger" href="/produno/delete/<%= produn.id %>">
+               Eliminar
+           </a>
+        </div> 
         </div>
-        <% } %>
-      
+  </div>
+  <% }) %>
+
+
+</div>
+     
+</div>
+</div>
+</div>
+
       
 
 

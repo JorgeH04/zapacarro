@@ -42,34 +42,27 @@
 
 
   
-    <div class="products-center">
-            <!-- single product -->
-            <% for(var i = 0; i < prodseis.length; i++) { %>
-              <article class="product">
-         <div class="col-md-4 text-center">
-          
-          <div class="img-container">
-              <a href="/prodseisredirect/<%= prodseis[i].id %>">
-                 <img src="<%= prodseis[i].imagePath %>" alt="product" class="product-img" />
-              </a>   
-            </div>
-        </div>
-            <h3>  <%= prodseis[i].product %> </h3>
-            <h4> <%= prodseis[i].price %> </h4>
-            <a class="btn btn-danger" href="/prodseis/delete/<%= prodseis[i].id %>">
-              Eliminar
+<div class="row mt-5">
+    <% prodseis.forEach(function (prodsei) { %>
+      <div class="col-md-3 ">
+       <div class="card"> 
+          <a href="/prodseisbackend/<%= prodsei.id %>">
+         <img class="card-img-top img-fluid" alt="img1" src="<%= prodsei.imagePath %>">
           </a>
-
-          </article>
-          <% } %>
-          <!-- end of single product -->
-          
-          </div>
-          </section>
-            </div>
-          </div>
+          <div class="card-body">
+        <div class="card-heading"><%= prodsei.product %></div>
+        <h4> $<%= prodsei.price %>  </h4>
+        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit neque, mollitia dolorem. </p>
+        <a class="btn btn-pink text-light"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To Cart</a> </div>
+        <a class="btn btn-danger" href="/prodseis/delete/<%= prodsei.id %>">
+          Eliminar
+      </a>
         </div>
-
-
+  </div>
+  <% }) %>
+</div>
+</div>
+</div>
+</div>
         <% include ../partials/_footer %>
         

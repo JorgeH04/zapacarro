@@ -42,33 +42,31 @@
 
 
   
-    <div class="products-center">
-            <!-- single product -->
-            <% for(var i = 0; i < prodcuatro.length; i++) { %>
-              <article class="product">
-         <div class="col-md-4 text-center">
-          
-          <div class="img-container">
-              <a href="/prodcuatrobackend/<%= prodcuatro[i].id %>">
-                 <img src="<%= prodcuatro[i].imagePath %>" alt="product" class="product-img" />
-              </a>   
-            </div>
-        </div>
-            <h3>  <%= prodcuatro[i].product %> </h3>
-            <h4> <%= prodcuatro[i].price %> </h4>
-            <a class="btn btn-danger" href="/prodcuatro/delete/<%= prodcuatro[i].id %>">
-              Eliminar
+<div class="row mt-5">
+    <% prodcuatro.forEach(function (prodcuatr) { %>
+      <div class="col-md-3 ">
+       <div class="card"> 
+          <a href="/prodcuatrobackend/<%= prodcuatr.id %>">
+         <img class="card-img-top img-fluid" alt="img1" src="<%= prodcuatr.imagePath %>">
           </a>
-
-          </article>
-          <% } %>
-          <!-- end of single product -->
-          
-          </div>
-          </section>
-            </div>
-          </div>
+          <div class="card-body">
+        <div class="card-heading"><%= prodcuatr.product %></div>
+        <h4> $<%= prodcuatr.price %>  </h4>
+        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit neque, mollitia dolorem. </p>
+        <a class="btn btn-pink text-light"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To Cart</a> </div>
+        <a class="btn btn-danger" href="/prodcuatro/delete/<%= prodcuatr.id %>">
+          Eliminar
+      </a>
         </div>
+  </div>
+  <% }) %>
+
+
+</div>
+     
+</div>
+</div>
+
 
 
         <% include ../partials/_footer %>
