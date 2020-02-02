@@ -8,7 +8,7 @@
             <h3>Digite color y talle</h3>
           </div>
           <div class="card-body">
-            <form action="/ofertados/tallecolor/<%= note._id %>" method="POST">
+            <form action="/ofertados/tallecolor/<%= ofertados._id %>" method="POST">
               <input type="hidden" name="_method" value="PUT">
               <div class="form-group">
                 <input type="text" name="talle" class="form-control" value="<%= ofertados.talle %>"/>
