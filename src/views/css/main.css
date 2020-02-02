@@ -13,18 +13,12 @@ body,html{margin: 0;padding: 0;}
   --mainTransition: all 0.3s linear;
 }
 
-html,
-body,
-.carousel,
-.carousel-inner,
-.carousel-inner .item{
-	height: 100%;
-}
 
-.carousel-caption{
-	top:30%;
-	bottom: auto;
-}
+
+.bg-black{background-color: rgba(14,14,14,1.00)}
+.carousel-caption{top:200px;}
+
+
 
 .heading{font-size: 60px; text-shadow: 2px 2px #ff0e3d;}
 .sub-heading{font-size: 30px; text-shadow: 2px 2px #ff0e3d;}
