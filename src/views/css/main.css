@@ -30,7 +30,9 @@ body,
 .sub-heading{font-size: 30px; text-shadow: 2px 2px #ff0e3d;}
 
 
-
+.container-fluidd{
+  position: fixed;
+}
 
   /* --------------- Carro boton ---------------- */
 
