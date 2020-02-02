@@ -8,7 +8,7 @@ const router = express.Router();
 // Models
 const Ofertauno = require('../models/ofertauno');
 const Cart = require('../models/cart');
-const Order = require('../models/Order');
+//const Order = require('../models/Order');
 
 // Helpers
 const { isAuthenticated } = require('../helpers/auth');
