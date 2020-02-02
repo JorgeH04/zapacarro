@@ -12,6 +12,8 @@
             <th>Producto</th>
             <th>Foto</th>
             <th>Cantidad</th>
+            <th>Talle</th>
+            <th>Color</th>
             <th>Precio</th>
             <th>Acciones</th>
           </tr>
@@ -19,7 +21,7 @@
         <tbody>
           <tr >
             <td class="text-center"><%= products[i].item.product %> </td>
-            <td class="text-center"> <img style="width: 5rem;" src="<%= products[i].imagePath %>"></td>
+            <td class="text-center"> <img style="width: 5rem;" src="<%= products[i].item.imagePath %>"></td>
             <td class="text-center"><%= products[i].qty %></td>
             <td class="text-center"><%= products[i].item.talle %></td>
             <td class="text-center"><%= products[i].item.color %></td>
