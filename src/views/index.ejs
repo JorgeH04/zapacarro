@@ -12,7 +12,7 @@
       </ol>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img class="d-block w-100" src="img/calzadoportada4.jpg" alt="img1">
+          <img class="d-block w-100" src="img/calzadoportada5.jpg" alt="img1">
            <div class="carousel-caption d-none d-md-block">
             <h1>BEST WINTER COLLECTION</h1>
              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -20,7 +20,7 @@
            </div>
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="img/calzadoportada5.jpg" alt="Second slide">
+          <img class="d-block w-100" src="img/calzadoportada2.jpg" alt="Second slide">
           <div class="carousel-caption d-none d-md-block">
             <h1>BEST WINTER COLLECTION</h1>
              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -46,15 +46,15 @@
         <div class="container-fluid">
            <div class="row bg-gray wow slideInDown">
            <div class="col-md-4">
-               <div class="icon-text"> <i class="fa fa-money" aria-hidden="true"></i> FAST SECURE PAYMENTS</div>
+               <div class="icon-text"> <i class="fa fa-money" aria-hidden="true"></i> PAGOS SEGUROS</div>
                </div>
                
                <div class="col-md-4 bg-pink">
-               <div class="icon-text"> <i class="fa fa-star" aria-hidden="true"></i> PREMIUM PRODUCTS</div>
+               <div class="icon-text"> <i class="fa fa-star" aria-hidden="true"></i> PRODUCTOS PREMIUNS</div>
                </div>
                
                <div class="col-md-4">
-               <div class="icon-text"> <i class="fa fa-truck" aria-hidden="true"></i> FREE & FAST DELIVERY</div>
+               <div class="icon-text"> <i class="fa fa-truck" aria-hidden="true"></i> ENVÍOS RÁPIDOS</div>
                </div>
             </div>
        </div>
@@ -63,9 +63,13 @@
         
         <div class="container mt-5 ">
         <div class="row wow flash">
-           <div class="col-md-12 text-center"><h1>LATEST PRODUCTS</h1></div>  
+           <div class="col-md-12 text-center"><h1>PROMOCIONES</h1></div>  
         </div>
-        
+        <div class="row mt-4 wow bounceIn">
+          <div class="col-md-12">
+              <div class="col-md-12"> <a href="/produnoindex" class="btn btn-light">VESTIDOS</a> <a href="/proddosindex" class="btn btn-light ml-4">REMERAS</a> <a href="/prodtresindex" class="btn btn-light ml-4">CALZADO</a> <a href="/prodcuatroindex" class="btn btn-light ml-4">JEANS</a> <a href="/prodcincoindex"  class="btn btn-light ml-4">ACCESORIOS</a> <a href="/prodseisindex"  class="btn btn-light ml-4">OUTLET</a> <a class="btn btn-light ml-4">BIKINIS</a> <a class="btn btn-light ml-4">ROPA INTERIOR</a> </div>
+          </div>
+        </div>
         <div class="row mt-5">
             <% ofertauno.forEach(function (ofertaun) { %>
 
@@ -74,7 +78,7 @@
                 <a href="/ofertaunoredirect/<%= ofertaun.id %>">
                    <img class="card-img-top img-fluid" alt="img1" src="<%= ofertaun.imagePath %>">
                 </a>
-                <div class="card-body">
+                <div class="card-body ">
                    <div class="card-heading"> <%= ofertaun.product %> </div>
                    <h4> $<%= ofertaun.price %>  </h4>
 
@@ -98,19 +102,7 @@
         
         
         
-        
-        <div class="container-fluid bc">
-          <div class="container pt-5 pb-5">
-            <div class="row inner-text">
-              <div class="col-md-6 text-light">
-                  <h3 class="wow slideInUp">NEW ARRIVALS</h3>
-                  <h1 class="mt-4 wow slideInDown">STRIPED  BLUE LINGERIE</h1>
-                  <a class="btn btn-lg bg-pink text-light mt-3 wow slideInLeft"> SHOP NOW</a>
-                </div>
-              </div>
-            </div>
-        </div>
-        
+   
         
         
         
@@ -123,16 +115,16 @@
         <div class="container mt-5">
       <div class="row wow flash">
             <div class="col-md-12 text-center">
-          <h1>BROWSE TOP SELLING PRODUCTS</h1>
+          <h1>DESTACADOS</h1>
         </div>
           </div>
             
       <div class="row mt-4 wow bounceIn">
             <div class="col-md-12">
-          <div class="col-md-12"> <a class="btn btn-light">TOPS</a> <a class="btn btn-light ml-4">JUMPSUITE</a> <a class="btn btn-light ml-4">LINGERIE</a> <a class="btn btn-light ml-4">JEANS</a> <a class="btn btn-light ml-4">DRESS</a> <a class="btn btn-light ml-4">COATS</a> <a class="btn btn-light ml-4">JUMPERS</a> <a class="btn btn-light ml-4">LEGGINGS</a> <a class="btn btn-light ml-4">BRA</a> </div>
+          <div class="col-md-12"> <a class="btn btn-light">VESTIDOS</a> <a class="btn btn-light ml-4">REMERAS</a> <a class="btn btn-light ml-4">CALZADOS</a> <a class="btn btn-light ml-4">JEANS</a> <a class="btn btn-light ml-4">ACCESORIOS</a> <a class="btn btn-light ml-4">OUTLET</a> <a class="btn btn-light ml-4">BIKINIS</a> <a class="btn btn-light ml-4">ROPA INTERIOR</a>  </div>
         </div>
           </div>
-            
+       
             
       <div class="row mt-5">
           <% ofertados.forEach(function (ofertado) { %>
@@ -154,7 +146,21 @@
             
            
             
-            
+        <div class="container mt-5">
+          <div class="row wow flash">
+                <div class="col-md-12 text-center">
+              <h1>TEMPORADA DE VERANO</h1>
+            </div>
+              </div>
+                
+              <div class="row mt-4 wow bounceIn">
+                    <div class="col-md-12">
+                        <div class="col-md-12"> <a href="/produnoindex" class="btn btn-light">VESTIDOS</a> <a href="/proddosindex" class="btn btn-light ml-4">REMERAS</a> <a href="/prodtresindex" class="btn btn-light ml-4">CALZADO</a> <a href="/prodcuatroindex" class="btn btn-light ml-4">JEANS</a> <a href="/prodcincoindex"  class="btn btn-light ml-4">ACCESORIOS</a> <a href="/prodseisindex"  class="btn btn-light ml-4">OUTLET</a> <a class="btn btn-light ml-4">BIKINIS</a> <a class="btn btn-light ml-4">ROPA INTERIOR</a> </div>
+                    </div>
+                  </div>
+
+                    
+                    
             
       <div class="row mt-5">
           <% ofertatres.forEach(function (ofertatre) { %>

@@ -11,10 +11,10 @@
             <form action="/ofertauno/tallecolor/<%= ofertauno._id %>" method="POST">
               <input type="hidden" name="_method" value="PUT">
               <div class="form-group">
-                <input type="text" name="talle" class="form-control" value="<%= ofertauno.talle %>"/>
+                <input type="text" name="talle" class="form-control" value="<%= ofertauno.tallestock %>"/>
               </div>
               <div class="form-group">
-                <input type="text" name="color" class="form-control" value="<%= ofertauno.color %>"/>
+                <input type="text" name="color" class="form-control" value="<%= ofertauno.colorstock %>"/>
               </div>
               <div class="form-group">
                 <button class="btn btn-primary btn-block" type="submit">
