@@ -52,7 +52,7 @@ body,html{
     position: absolute;
     top: -8px;
     right: -8px;
-    background: var(--primaryColor);
+    background: #ff0e3d;
     padding: 0 5px;
     border-radius: 30%;
     color: var(--mainWhite);
@@ -75,12 +75,14 @@ body,html{
 
 
     .bg-gray{background-color: lightgray}
-    .bg-pink{background-color: deeppink; color: white;}
+    .bg-pink{background-color: indigo color: white;}
     
     
     .icon-text {
       text-align: center; margin: 20px auto;
       font-size: 30px;
+      
+      
     }
     .icon-text i{font-size: 40px; font-weight: 800;}
     
@@ -118,7 +120,9 @@ body,html{
     
     .footer-heading {
         font-size: 20px; font-weight: bold;letter-spacing: 3px;color: deeppink;
+        color:2
     }
+    
     
     .footer-list {
         list-style-type: none; padding-left: 0;
