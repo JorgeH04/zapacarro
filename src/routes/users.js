@@ -83,7 +83,7 @@ router.post('/users/signin', passport.authenticate('local', {
     req.session.oldUrl = null;
     res.redirect(oldUrl);
   }else{
-    res.redirect('/users/profile');
+    res.redirect('/');
   }
 });
 

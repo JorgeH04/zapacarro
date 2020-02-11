@@ -1,22 +1,25 @@
+<% include ../partials/_header %>
+
+
 <div class="row">
-    <div class="col-md-4 mx-auto">
-      <div class="card">
+    <div class="col-md-4 mx-auto mt-5 " >
+      <div class="card " style="margin-top: 50px">
         <div class="card-header">
-          Account Register 
+          Regístrese ahora
         </div>
         <div class="card-body">
           <form action="/users/signup" method="POST">
             <div class="form-group">
-              <input type="text" class="form-control" name="name" placeholder="Name" value="{{name}}">
+              <input type="text" class="form-control" name="name" placeholder="Name" value="">
             </div>
             <div class="form-group">
-              <input type="email" class="form-control" name="email" placeholder="Email" value="{{email}}">
+              <input type="email" class="form-control" name="email" placeholder="Email" value="">
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" name="password" placeholder="Password" value="{{password}}">
+              <input type="password" class="form-control" name="password" placeholder="Password" value="">
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" value="{{confirm_password}}">
+              <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" value="">
             </div>
             <button class="btn btn-primary btn-block">
               Signup 
@@ -26,4 +29,7 @@
       </div>
     </div>
   </div>
-  
+
+
+
+  <% include ../partials/_footer %>
