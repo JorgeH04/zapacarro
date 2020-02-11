@@ -6,11 +6,8 @@ const Ofertatres = require('../models/ofertatres');
 const Cart = require('../models/cart');
 
 
-router.get('/', async (req, res) => {
-  res.render('indexx');
-}); 
 
-router.get('/index', async (req, res) => {
+router.get('/', async (req, res) => {
   const ofertauno = await Ofertauno.find();
   const ofertados = await Ofertados.find();
   const ofertatres = await Ofertatres.find();

@@ -1,6 +1,6 @@
 module.exports = function Cart(oldCart) {
-    this.items = oldCart.items || {item: item, qty: 1, price: 0};
-    this.totalQty = oldCart.totalQty || 1;
+    this.items = oldCart.items || {};
+    this.totalQty = oldCart.totalQty || 0;
     this.totalPrice = oldCart.totalPrice || 0;
 
     this.add = function(item, id){

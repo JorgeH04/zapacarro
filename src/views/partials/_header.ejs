@@ -52,7 +52,7 @@
             <span class="nav-icon">
              <i class="fas fa-cart-plus"></i>
             </span>
-            <div class="cart-items"><%= session.cart.totalQty%></div>
+            <div class="cart-items"><%= session.cart.totalQty  || 0 %></div>
             </a>
          </div>
         </div>
