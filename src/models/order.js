@@ -8,14 +8,6 @@ const OrderSchema = new Schema({
     type: Object,
     required: true
   },
-  color: {
-    type: String,
-    required: true
-  },
-  talle: {
-    type: String,
-    required: true
-  },
   address: {
     type: String,
     required: true

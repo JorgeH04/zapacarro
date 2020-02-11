@@ -8,7 +8,7 @@ const router = express.Router();
 // Models
 const Ofertatres = require('../models/ofertatres');
 const Cart = require('../models/cart');
-//const Order = require('../models/Order');
+const Order = require('../models/Order');
 
 // Helpers
 const { isAuthenticated } = require('../helpers/auth');
@@ -194,7 +194,7 @@ res.render('checkout');
 router.get('/checkout',isAuthenticated, function (req, res, next){
   
   var cart = new Cart(req.session.cart);
-  res.render('notes/checkout', {total: cart.totalPrice})
+  res.render('cart/checkout', {total: cart.totalPrice})
 });
 
 
@@ -213,7 +213,7 @@ router.post('/checkout', isAuthenticated, async (req, res, next)=>{
   });
   await order.save();
   req.flash('success_msg', 'Note Added Successfully');
-  res.redirect('/notes');
+  res.redirect('/shopcart');
   
 })
 
