@@ -144,6 +144,124 @@ body,html{
 
 
 
+    .half-early-routine {
+        text-align: center;
+    }
+    
+    .half-early-routine h3 {
+        text-align: center;
+    }
+    
+    .routine-buttion {
+        padding: 10px 20px 10px 20px;
+        border-radius: 50px;
+        background-color: #003A6A;
+        border: none;
+        color: white;
+        margin-top: 30px;
+    }
+    
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+    
+    .final-early-routine {
+        text-align: center;
+    }
+    
+    .final-early-routine h3 {
+        text-align: center;
+    }
+    
+    .Tutoria-early-routine {
+        text-align: center;
+    }
+    
+    .Tutoria-early-routine h3 {
+        text-align: center;
+    }
+    
+    .ssc-early-routine {
+        text-align: center;
+    }
+    
+    .ssc-early-routine h3 {
+        text-align: center;
+    }
+    
+    .jsc-early-routine {
+        text-align: center;
+
+
+
+
+/*** Account Page for the User ***/
+.account-page{
+    padding:  5%;
+}
+.account-page h3 {
+    padding-bottom: 10px;
+    border-bottom: 1px dotted gray;
+}
+.account-page .well {
+    min-height: 190px;
+    padding: 0px 5px 0px 20px;
+    background-color: transparent;
+}
+.account-page h2{
+    padding-bottom: 5px;
+    border-bottom: 1px solid #808080;
+}
+.account-page ul{
+    list-style: none;
+}
+.account-page ul li{
+    padding: 5px;
+    font-weight: bold;
+}
+.account-page ul li.active {
+    display: block;
+    background: #ffd24b;
+    border-radius: 0px 1px 40px 0px;
+}
+.account-page ul li.active a {
+    color: #1B5E20;
+}
+/* .account-page ul li.active:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    border-top: 14px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 39px solid #ffd451;
+    margin-top: -2px;
+} */
+.account-page ul li.active:hover{
+
+}
+.account-page form {
+    border: 1px solid #EEEEEE;
+    padding: 5%;
+}
+
+
+
+
+
+
 
 
 

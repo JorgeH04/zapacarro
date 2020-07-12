@@ -3,8 +3,56 @@ const passport = require('passport');
 
 // Models
 const User = require('../models/User');
-//const Order = require('../models/Order');
+const Order = require('../models/Order');
 const Cart = require('../models/cart');
+
+
+//router.get('/pedidos', async (req, res) => {
+
+// var user;
+// var cart;
+//  Order
+ //   .find({})
+ //   .sort({ timestamp: -1 })
+ //   .forEach(function(order){
+ // cart=new Cart(order.cart);
+  //user=new User(order.user);
+
+  //order.items = cart.generateArray();
+//});
+ // res.render('cart/pedidos', {
+ //   orders: orders
+//  });
+//});
+
+router.get('/pedidos', (req, res) => {
+  
+   Order
+ //  .find({}) .sort({ timestamp: -1 })
+
+  .find({},function(err, orders){
+
+   if (err) {
+      return res.write('error');
+    }
+
+
+    var user;
+    var cart;
+    var time;
+    orders
+    .forEach(function(order){
+      cart=new Cart(order.cart);
+      user=new User(order.user);
+
+      order.items = cart.generateArray();
+    //  order.items = cart
+    });
+    //orders.sort({ timestamp: -1 })
+    res.render('cart/pedidos', { orders: orders});
+  })
+
+});
 
 router.get('/users/profile', (req, res) => {
   Order.find({user: req.user}, function(err, orders){
@@ -20,6 +68,7 @@ router.get('/users/profile', (req, res) => {
   })
   
 });
+
 
 router.get('/users/signup', (req, res) => {
   res.render('users/signup');
@@ -93,5 +142,14 @@ router.get('/users/logout', (req, res) => {
   req.flash('success_msg', 'You are logged out now.');
   res.redirect('/users/signin');
 });
+
+
+
+router.get('/users/backend', async (req, res) => {
+  const users = await User.find();
+  res.render('users/usersback', { users});
+  
+});
+
 
 module.exports = router;

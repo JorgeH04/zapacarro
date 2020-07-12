@@ -33,18 +33,7 @@
         <li class="nav-item active">
           <a class="nav-link" href="/users/logout">Logout</a>
         </li>
-        <div id="cart-info" class="nav-info align-items-center cart-info d-flex justify-content-between mx-lg-5">
-          <div class="cart-btn">
-            <a href="/shopcart/">
-            <span class="nav-icon">
-             <i class="fas fa-cart-plus"></i>
-            </span>
-            <% if(session.cart) { %>
-            <div class="cart-items"><%= session.cart.totalQty%></div>
-            <% } %>
-            </a>
-         </div>
-        </div> 
+       
         
         <% } else { %>                    
        <li class="nav-item active">
@@ -59,21 +48,22 @@
        
        
         </div>
-        <div id="cart-info" class="nav-info align-items-center cart-info d-flex justify-content-between mx-lg-5">
-          <div class="cart-btn">
-            <a href="/shopcart/">
-            <span class="nav-icon">
-             <i class="fas fa-cart-plus"></i>
-            </span>
-            <% if(session.cart) { %>
-            <div class="cart-items"><%= session.cart.totalQty%></div>
-            <% } %>
-            </a>
-         </div>
-        </div>
+       
     
                   <% } %>
                                   </ul>
+                                  <div id="cart-info" class="nav-info align-items-center cart-info d-flex justify-content-between mx-lg-5">
+                                    <div class="cart-btn">
+                                      <a href="/shopcart/">
+                                      <span class="nav-icon">
+                                       <i class="fas fa-cart-plus"></i>
+                                      </span>
+                                      <% if(session.cart) { %>
+                                      <div class="cart-items"><%= session.cart.totalQty%></div>
+                                      <% } %>
+                                      </a>
+                                   </div>
+                                  </div> 
        
   
     </div>

@@ -1,0 +1,62 @@
+<% include ../partials/_header %>
+
+
+
+
+<section class="tutorial-early-result">
+        <div class="container">
+            <h3>Tutorial Exam Result Sheet</h3>
+            <div class="tutorial-result">
+    
+            <table>
+      <tr>
+    
+        <th>SL</th>
+        <th>Name</th>
+        <th>Roll NO</th>
+        <th>Class</th>
+        <th>Department</th>
+          <th>Grade</th>
+      </tr>
+
+        <% orders.forEach(function (order) { %>
+    
+        <tr>
+        <% order.items.forEach(function (item) { %>
+                
+                <td><%= item.item.product %></td>
+                <td><%= item.price %></td>
+                <td><%= item.qty %></td>
+            <% }) %>
+        
+        </tr>
+        <td>Precio Total: <%= order.cart.totalPrice %></td>
+
+        <% }) %>            
+
+    
+        <tr>
+      
+        
+        </tr>
+        <tr>
+           
+            
+        </tr>
+      </table>
+              
+              
+              </div>
+        
+      </div>
+          
+          
+          
+          </section>
+      
+  
+          
+
+
+
+<% include ../partials/_footer %>      

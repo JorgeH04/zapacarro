@@ -1,0 +1,151 @@
+<% include ../partials/_header %>
+
+    
+
+<div class="content-area mt-5">
+
+        <div class="account-page">
+            <div class="container">
+    
+              <div class="row">
+                <div class="col-sm-3">
+                    <h2>My Account</h2>
+                    <ul>
+                        <li  class="active"><a href="account.html">Account Control Panel</a></li>
+                        <li><a href="account_information.html">Personal Information</a></li>
+                        <li><a href="account_carts.html">My All Orders</a></li>
+                        <li><a href="account_carts.html">My Carts Products</a></li>
+                        <li><a href="account_reviews.html">My Reviews and Ratings</a></li>
+                        <li><a href="account_newsletter.html">Account Newsletter and Other</a></li>
+                    </ul>
+                </div>
+
+                
+
+                <div class="col-sm-9">
+                    <h2>Account Control Panel</h2>
+                    <strong>Hello Maniruzzaman Akash</strong><br />
+                    <p>From your account control panel, you can access all of your recent activites, orders, save products and you can edit your personal information and other details.</p>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="well">
+                                <h3>Contact Information</h3>
+                                <p>Name : Maniruzzaman Akash</p>
+                                <p>Email : Maniruzzaman Akash</p>
+                                <p><a href="account_change_email.html">Change Email</a> | <a href="account_change_password.html">Change Password</a></p>
+                                <p class="pull-right"><a href="#"><i class="fa fa-edit"></i> Edit</a></p>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+    
+                        <div class="col-md-6 col-sm-6">
+                            <div class="well">
+                                <h3>News Letters</h3>
+                                <p>Do you want to get the latest product news and promotion offers then make it on otherwise off it.</p>
+                                <p class="pull-right"><a href="#"><i class="fa fa-edit"></i> Edit</a></p>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+    
+                        <div class="col-md-6 col-sm-6">
+                            <div class="well">
+                                <h3>Default Billing Address</h3>
+                                <address class="address">
+                                    <strong>Name:</strong> Maniruzzaman Akash <br />
+                                    <strong>Email:</strong> manirujjamanakash@gmail.com <br />
+                                    <strong>Contact No:</strong> +8801951233084<br />
+                                </address>
+                                <p class="pull-right"><a href="#"><i class="fa fa-edit"></i> Edit</a></p>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                       
+                        <div class="col-md-6 col-sm-6">
+                            
+                            <div class="well">
+                            <h3>Default Delivery Address Address</h3>
+                                <address class="address">
+                                    <strong>Name:</strong> Maniruzzaman Akash <br />
+                                    <strong>Address:</strong> <br />
+                                    Dumki-8602, Patuakhali, Barisal<br />
+                                    Contact No: +8801951233084<br />
+                                </address>
+                                <p class="pull-right"><a href="#"><i class="fa fa-edit"></i> Edit</a></p>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+    
+    
+                    </div>
+                </div>
+            </div> <!--End Row-->
+    
+        </div>
+    </div> <!--End Account page div-->
+    
+    </div> <!-- End content Area class -->
+
+    
+
+
+<section class="tutorial-early-result">
+    <div class="container">
+        <h3>Tutorial Exam Result Sheet</h3>
+        <div class="tutorial-result">
+
+        <table>
+  <tr>
+
+    <th>SL</th>
+    <th>Name</th>
+    <th>Roll NO</th>
+    <th>Class</th>
+    <th>Department</th>
+      <th>Grade</th>
+  </tr>
+
+    <% orders.forEach(function (order) { %>
+
+    <tr>
+    <% order.items.forEach(function (item) { %>
+            
+            <td><%= item.item.product %></td>
+            <td><%= item.price %></td>
+            <td><%= item.qty %></td>
+        <% }) %>
+    
+    </tr>
+    <td>Precio Total: <%= order.cart.totalPrice %></td>
+
+    <% }) %>            
+
+
+    <tr>
+  
+    
+    </tr>
+    <tr>
+       
+        
+    </tr>
+  </table>
+          
+          
+          </div>
+    
+  </div>
+      
+      
+      
+      </section>
+  
+   
+
+
+   
+
+    <% include ../partials/_footer %>
+
+
+
+ 
