@@ -6,7 +6,7 @@ const mercadopago = require("mercadopago");
 // Models
 const Produno = require('../models/produno');
 const Cart = require('../models/cart');
-const Order = require('../models/Order');
+//const Order = require('../models/Order');
 
 // Helpers
 const { isAuthenticated } = require('../helpers/auth');
