@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const ObjectId = Schema.ObjectId;
 
 const OrderSchema = new Schema({
   user: { 
-    type: Schema.Types.ObjectId, 
+  //  type: Schema.Types.ObjectId, 
+    type: ObjectId,
     ref: 'User'},
 
     cart: {
