@@ -11,22 +11,21 @@ const OrderSchema = new Schema({
       ref: 'User'},
     
       
-    
-  cart: {
-    type: Object,
-    required: true
-  },
-  timestamp: { type: Date, default: Date.now() }
+    cart: {
+      type: Object,
+      required: true
+    },
+    timestamp: { type: Date, default: Date.now() }
 
-  //,
-  //address: {
-   // type: String,
+  ,
+  address: {
+    type: String,
    // required: true
- // },
- // name: {
- //   type: String,
+  },
+  name: {
+    type: String,
   //  required: true
-  //}
+  }
 });
 
 module.exports = mongoose.model('Order', OrderSchema);

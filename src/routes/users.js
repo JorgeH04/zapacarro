@@ -7,48 +7,25 @@ const Order = require('../models/Order');
 const Cart = require('../models/cart');
 
 
-//router.get('/pedidos', async (req, res) => {
 
-// var user;
-// var cart;
-//  Order
- //   .find({})
- //   .sort({ timestamp: -1 })
- //   .forEach(function(order){
- // cart=new Cart(order.cart);
-  //user=new User(order.user);
-
-  //order.items = cart.generateArray();
-//});
- // res.render('cart/pedidos', {
- //   orders: orders
-//  });
-//});
 
 router.get('/pedidos', (req, res) => {
   
    Order
- //  .find({}) .sort({ timestamp: -1 })
-
   .find({},function(err, orders){
-
    if (err) {
       return res.write('error');
     }
 
-
     var user;
     var cart;
-    var time;
     orders
     .forEach(function(order){
       cart=new Cart(order.cart);
       user=new User(order.user);
 
       order.items = cart.generateArray();
-    //  order.items = cart
     });
-    //orders.sort({ timestamp: -1 })
     res.render('cart/pedidos', { orders: orders});
   })
 
