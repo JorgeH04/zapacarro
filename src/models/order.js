@@ -6,18 +6,11 @@ const OrderSchema = new Schema({
     type: Schema.Types.ObjectId, 
     ref: 'User'},
 
-    username: { 
-      type: Schema.Types.ObjectId, 
-      ref: 'User'},
-    
-      
     cart: {
       type: Object,
       required: true
     },
-    timestamp: { type: Date, default: Date.now() }
-
-  ,
+   // timestamp: { type: Date, default: Date.now() },
   address: {
     type: String,
    // required: true
