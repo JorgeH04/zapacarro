@@ -60,9 +60,9 @@ app.use((req, res, next) => {
 // routes
 app.use(require('./routes'));
 app.use(require('./routes/users'));
-//app.use(require('./routes/ofertauno'));
-//app.use(require('./routes/ofertados'));
-//app.use(require('./routes/ofertatres'));
+app.use(require('./routes/ofertauno'));
+app.use(require('./routes/ofertados'));
+app.use(require('./routes/ofertatres'));
 app.use(require('./routes/produno'));
 app.use(require('./routes/proddos'));
 app.use(require('./routes/prodtres'));
