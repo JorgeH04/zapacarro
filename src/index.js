@@ -2,7 +2,7 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 } 
 
-
+const { format } = require('timeago.js');
 const express = require('express');
 const path = require('path');
 const methodOverride = require('method-override');
@@ -50,6 +50,7 @@ app.use(function(req, res, next){
 
 // Global Variables
 app.use((req, res, next) => {
+    app.locals.format = format;
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');

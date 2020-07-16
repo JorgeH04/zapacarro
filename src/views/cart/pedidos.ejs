@@ -27,11 +27,15 @@
                 <td><%= item.item.product %></td>
                 <td><%= item.price %></td>
                 <td><%= item.qty %></td>
+
             <% }) %>
         
         </tr>
         <td>Precio Total: <%= order.cart.totalPrice %></td>
-
+        <td>Nombre: <%= order.name %></td>
+        <td>Dirección: <%= order.direccion %></td>
+        <td>Teléfono: <%= order.telefono %></td>
+        <td><%= format(order.timestamp) %></td>    
         <% }) %>            
 
     

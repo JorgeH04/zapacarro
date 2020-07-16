@@ -11,16 +11,26 @@ const OrderSchema = new Schema({
     cart: {
       type: Object,
       required: true
-    }
+    },
    // timestamp: { type: Date, default: Date.now() },
   // address: {
    //  type: String,
    // required: true
    //},
-  // name: {
-    // type: String,
-  //  required: true
-  // }
+   name: {
+    type: String,
+   required: true
+   },
+   direccion: {
+    type: String,
+   required: true
+   },
+   telefono: {
+    type: Number,
+   required: true
+   },
+   timestamp: { type: Date, default: Date.now() }
+
 });
 
 module.exports = mongoose.model('Order', OrderSchema);

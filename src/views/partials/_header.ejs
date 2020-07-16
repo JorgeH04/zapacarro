@@ -1,70 +1,150 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/animate.css">
+    <title>E-Commerce Template</title>
 
-    <title>Calzados-basilea</title>
+    <link href="//fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300i,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  
+    <div class="container-fluid">
+
+        <div class="row min-vh-100">
+            <div class="col-12">
+                <header class="row">
+                    <!-- Top Nav -->
+                    <div class="col-12 bg-dark py-2 d-md-block d-none">
+                        <div class="row">
+                            <div class="col-auto mr-auto">
+                                <ul class="top-nav">
+                                    <li>
+                                        <a href="tel:+123-456-7890"><i class="fa fa-phone-square mr-2"></i>+123-456-7890</a>
+                                    </li>
+                                    <li>
+                                        <a href="mailto:mail@ecom.com"><i class="fa fa-envelope mr-2"></i>mail@ecom.com</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-auto">
+                                <ul class="top-nav">
+                                        <% if(user) { %>
+                                    <li>
+                                        <a href="/"><i class="fas fa-user-edit mr-2"></i>Home</a>
+                                    </li>        
+                                    <li>
+                                        <a href="/users/profile"><i class="fas fa-user-edit mr-2"></i>Perfil</a>
+                                    </li>
+                                    <li>
+                                        <a href="/users/logout"><i class="fas fa-user-edit mr-2"></i>Logout</a>
+                                    </li>
+                                         <% } else { %>     
+                                
+                                     <li>
+                                          <a href="/users/signup"><i class="fas fa-user-edit mr-2"></i>Register</a>
+                                    </li>
+                                    <li>
+                                            <a href="/users/signin"><i class="fas fa-sign-in-alt mr-2"></i>Login</a>
+                                    </li>
+                                                        
+                                            
 
 
-  <nav class="navbar navbar-expand-lg bg-dark fixed-top ">
-    <a class="navbar-brand" href="#"><img src="img/logo.svg" alt=""></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNav">
-      <span class="toggler-icon"><i class="fas fa-bars"></i></span>
-    </button>
-    <div class="collapse navbar-collapse" id="myNav">
-      <ul class="navbar-nav mx-auto text-capitalize" style="font-size: 17px; font-weight: bold;">
-            <% if(user) { %>
-          <li class="nav-item active">
-          <a class="nav-link" href="/">Home</a>
-          </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="/users/profile">Perfil</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="/users/logout">Logout</a>
-        </li>
-       
-        
-        <% } else { %>                    
-       <li class="nav-item active">
-          <a class="nav-link" href="/">home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="/users/signin">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/users/signup">Register</a>
-        </li>
-       
-       
-        </div>
-       
-    
-                  <% } %>
-                                  </ul>
-                                  <div id="cart-info" class="nav-info align-items-center cart-info d-flex justify-content-between mx-lg-5">
-                                    <div class="cart-btn">
-                                      <a href="/shopcart/">
-                                      <span class="nav-icon">
-                                       <i class="fas fa-cart-plus"></i>
-                                      </span>
-                                      <% if(session.cart) { %>
-                                      <div class="cart-items"><%= session.cart.totalQty%></div>
-                                      <% } %>
-                                      </a>
-                                   </div>
-                                  </div> 
-       
-  
-    </div>
-    </nav>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Top Nav -->
+
+                    <!-- Header -->
+                    <div class="col-12 bg-white pt-4">
+                        <div class="row">
+                            <div class="col-lg-auto">
+                                <div class="site-logo text-center text-lg-left">
+                                    <a href="/">E-Commerce</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 mx-auto mt-4 mt-lg-0">
+                                <form action="#">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="search" class="form-control border-dark" placeholder="Search..." required>
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-dark"><i class="fas fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-lg-auto text-center text-lg-left header-item-holder">
+                                
+                                <a href="/shopcart/" class="header-item">
+                                    <% if(session.cart) { %>
+                                    <i class="fas fa-shopping-bag mr-2"></i><span id="header-qty" class="mr-3"><%= session.cart.totalQty%></span>
+                                    <% } %>
+                                    <i class="fas fa-money-bill-wave mr-2"></i><span id="header-price">$4,000</span>
+                                </a>
+                            </div>
+                        </div>
+                        <% } %>
+
+                        <!-- Nav -->
+                        <div class="row">
+                            <nav class="navbar navbar-expand-lg navbar-light bg-white col-12">
+                                <button class="navbar-toggler d-lg-none border-0" type="button" data-toggle="collapse" data-target="#mainNav">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="mainNav">
+                                    <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
+                                        <li class="nav-item active">
+                                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="electronics" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Electronics</a>
+                                            <div class="dropdown-menu" aria-labelledby="electronics">
+                                                <a class="dropdown-item" href="/produnoindex/:1">Computers</a>
+                                                <a class="dropdown-item" href="category.html">Mobile Phones</a>
+                                                <a class="dropdown-item" href="category.html">Television Sets</a>
+                                                <a class="dropdown-item" href="category.html">DSLR Cameras</a>
+                                                <a class="dropdown-item" href="category.html">Projectors</a>
+                                            </div>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="fashion" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Fashion</a>
+                                            <div class="dropdown-menu" aria-labelledby="fashion">
+                                                <a class="dropdown-item" href="category.html">Men's</a>
+                                                <a class="dropdown-item" href="category.html">Women's</a>
+                                                <a class="dropdown-item" href="category.html">Children's</a>
+                                                <a class="dropdown-item" href="category.html">Accessories</a>
+                                                <a class="dropdown-item" href="category.html">Footwear</a>
+                                            </div>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="books" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Books</a>
+                                            <div class="dropdown-menu" aria-labelledby="books">
+                                                <a class="dropdown-item" href="category.html">Adventure</a>
+                                                <a class="dropdown-item" href="category.html">Horror</a>
+                                                <a class="dropdown-item" href="category.html">Romantic</a>
+                                                <a class="dropdown-item" href="category.html">Children's</a>
+                                                <a class="dropdown-item" href="category.html">Non-Fiction</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                        <!-- Nav -->
+
+                    </div>
+                    <!-- Header -->
+
+                </header>
+            </div>

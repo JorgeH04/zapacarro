@@ -1,7 +1,5 @@
 <% include ../partials/_header %>
 
-
-
 <div class="col-md-4 mx-auto">
   <div class="card text-center">
     <div class="card-header">
@@ -10,26 +8,27 @@
     <div class="card-body">
       <form action="/ofertauno/new-ofertauno" method="POST">
         <div class="form-group">
-          <input type="text" name="imagePath" class="form-control" placeholder="image" autofocus/>
+          <input type="text" name="name" class="form-control" placeholder="name" autofocus/>
         </div>
        <div class="form-group">
-          <input type="text" name="product" class="form-control" placeholder="product" autofocus/>
+          <input type="text" name="title" class="form-control" placeholder="title" autofocus/>
         </div>
         <div class="form-group">
-            <input type="text" name="talle" class="form-control" placeholder="talle" autofocus/>
+            <input type="text" name="image" class="form-control" placeholder="imagen 1" autofocus/>
+          </div>
+          <div class="form-group">
+            <input type="text" name="imagedos" class="form-control" placeholder="imagen 2" autofocus/>
+          </div>
+          <div class="form-group">
+            <input type="text" name="imagetres" class="form-control" placeholder="imagen 3" autofocus/>
           </div>
                  <div class="form-group">
-            <input type="text" name="color" class="form-control" placeholder="color" autofocus/>
+            <input type="text" name="description" class="form-control" placeholder="descripcion" autofocus/>
           </div>
                  <div class="form-group">
-            <input type="text" name="tallestock" class="form-control" placeholder="tallestock" autofocus/>
+            <input type="text" name="price" class="form-control" placeholder="precio" autofocus/>
           </div>
-                 <div class="form-group">
-            <input type="text" name="colorstock" class="form-control" placeholder="colorstock" autofocus/>
-          </div>
-        <div class="form-group">
-          <input type="number" name="price" class="form-control" placeholder="price" autofocus/>
-        </div>
+                 
         <div class="form-group">
           <button class="btn btn-primary btn-block" type="submit">
             Save
@@ -50,11 +49,15 @@
           
           <div class="img-container">
               <a href="/ofertaunoredirect/<%= ofertauno[i].id %>">
-                 <img src="<%= ofertauno[i].imagePath %>" alt="product" class="product-img" />
+                 <img src="<%= ofertauno[i].image %>" alt="product" class="product-img" />
               </a>   
-            </div>
+          </div>
+          <div class="img-container">
+               <img src="<%= ofertauno[i].imagedos %>" alt="product" class="product-img" />
         </div>
-            <h3>  <%= ofertauno[i].product %> </h3>
+        </div>
+
+            <h3>  <%= ofertauno[i].description %> </h3>
             <h4> <%= ofertauno[i].price %> </h4>
             <a class="btn btn-danger" href="/ofertauno/delete/<%= ofertauno[i].id %>">
               Eliminar

@@ -13,10 +13,8 @@ const { isAuthenticated } = require('../helpers/auth');
 
 
 
-//router.get('/produnoindex', async (req, res) => {
- // const produno = await Produno.find();
- // res.render('produno/produno', { produno });
-//});
+
+
 router.get('/produnoindex/:page', async (req, res) => {
 
 
@@ -42,13 +40,15 @@ router.get('/produnoindex/:page', async (req, res) => {
 
 
 
+
+
 router.post('/produno/new-produno',  async (req, res) => {
-  const { imagePath, product, color, talle, colorstock, tallestock, price } = req.body;
+  const { name, title, image, imagedos, imagetres, description, price } = req.body;
   const errors = [];
-  if (!imagePath) {
+  if (!image) {
     errors.push({text: 'Please Write a Title.'});
   }
-  if (!product) {
+  if (!title) {
     errors.push({text: 'Please Write a Description'});
   }
   if (!price) {
@@ -57,12 +57,12 @@ router.post('/produno/new-produno',  async (req, res) => {
   if (errors.length > 0) {
     res.render('notes/new-note', {
       errors,
-      imagePath,
-      product,
+      image,
+      title,
       price
     });
   } else {
-    const newNote = new Produno({ imagePath, product, color, talle, colorstock, tallestock, price });
+    const newNote = new Produno({ name, title, image, imagedos, imagetres, description, price });
     //newNote.user = req.user.id;
     await newNote.save();
     req.flash('success_msg', 'Note Added Successfully');
@@ -187,7 +187,7 @@ router.get('/remove/:id', function(req, res, next){
 
 router.get('/shopcart', function (req, res, next){
   if(!req.session.cart){
-    return res.render('/', {products:null})
+    return res.render('cart/shopcart', {products:null})
   }
   var cart = new Cart(req.session.cart);
   res.render('cart/shopcart', {products: cart.generateArray(), totalPrice: cart.totalPrice})
@@ -204,7 +204,17 @@ router.get('/shopcart', function (req, res, next){
 
 
 //router.post('/checkout', isAuthenticated, async (req, res, next)=>{  
-router.post('/confirmacion',  async (req, res, next)=>{
+
+
+
+router.get('/checkout', function (req, res, next){
+  var cart = new Cart(req.session.cart);
+  res.render('cart/checkout', {products: cart.generateArray(), total: cart.totalPrice})
+});
+
+
+
+router.post('/confirmacion', isAuthenticated, async (req, res, next)=>{
   if(!req.session.cart){
     return res.render('/', {products:null})
   }
@@ -212,22 +222,21 @@ router.post('/confirmacion',  async (req, res, next)=>{
 
   const order = new Order({
     user: req.user,
-    cart: cart
+    cart: cart,
     //address: req.body.address,
-    //name: req.body.name
+    name: req.user.name,
+    direccion: req.user.direccion,
+    telefono: req.user.telefono
+    //timestamp:req.body.timestamp
 
   });
+  console.log(order)
   await order.save();
   req.flash('success_msg', 'Note Added Successfully');
   res.redirect('/prepagar');
   
 })
 
-
-router.get('/checkout', function (req, res, next){
-  var cart = new Cart(req.session.cart);
-  res.render('cart/checkout', {products: cart.generateArray(), total: cart.totalPrice})
-});
 
 router.get('/prepagar', function (req, res, next){
   var cart = new Cart(req.session.cart);
@@ -236,7 +245,8 @@ router.get('/prepagar', function (req, res, next){
 
 
 
-router.post('/checkout',  async (req, res) => {
+
+router.post('/checkout',isAuthenticated,  async (req, res) => {
 
   if(!req.session.cart){
     return res.render('/', {products:null})
@@ -248,6 +258,8 @@ router.post('/checkout',  async (req, res) => {
      // access_token: process.env.ACCESS_TOKEN
      access_token: 'TEST-1727718622428421-041715-2360deef34519752e5bd5f1fca94cdf1-344589484',
      publicKey: 'TEST-662a163b-afb0-4994-9aea-6be1cca2decd'
+   // access_token: 'APP_USR-1727718622428421-041715-07777da5a8f8451aba826d2727adeadd-344589484',
+     //publicKey: 'APP_USR-9abfa6a9-7a19-45c9-9d13-15edf5baf8f7'
   
   
     });
@@ -263,23 +275,7 @@ router.post('/checkout',  async (req, res) => {
       ]
     };
 
-    //let  preference = {
-   //   products: [
-     //   cart = {
-          //id: cart.id,
-        //  title: product,
-          //description : description,
-         // quantity: qty,
-          //currency_id: 'BRL',
-          //unit_price: price
-      //  }
-    //  ]
-     // ,
-     // total : {
-     //   unit_price: cart.totalPrice, 
-     // }
-   // }
-  
+   
     mercadopago.preferences
       .create(preference)
       .then(function(response) {
