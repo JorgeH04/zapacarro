@@ -41,34 +41,66 @@
 </div>
 
 
-<div class="row mt-5">
-    <% produno.forEach(function (produn) { %>
-      <div class="col-md-3 ">
-       <div class="card"> 
-          <a href="/produnobackend/<%= produn.id %>">
-         <img class="card-img-top img-fluid" alt="img1" src="<%= produn.imagePath %>">
-          </a>
-          <div class="card-body">
-        <div class="card-heading"><%= produn.product %></div>
-        <h4> $<%= produn.price %>  </h4>
-        <a class="btn btn-pink text-light"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To Cart</a> </div>
-        <div class="card-body">
-            <a class="btn btn-danger" href="/produno/delete/<%= produn.id %>">
-               Eliminar
-           </a>
-        </div> 
+
+
+
+<div class="col-12">
+    <!-- Main Content -->
+    <main class="row">
+  
+        <!-- Category Products -->
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12 py-3">
+                    <div class="row">
+                        <div class="col-12 text-center text-uppercase">
+                            <h2>Computers</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                          <% produno.forEach(function (produn) { %>
+  
+                        <!-- Product -->
+                        <div class="col-xl-2 col-lg-3 col-sm-6 my-3">
+                            <div class="col-12 bg-white text-center h-100 product-item">
+                                <div class="row h-100">
+                                    <div class="col-12 p-0 mb-3">
+                                        <a href="/prodtresredirect/<%= produn.id %>">
+                                            <img src="<%= produn.image %>" class="img-fluid">
+                                        </a>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                          <%= produn.title %> 
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                            <span class="product-price-old">
+                                                $<%= produn.price %> 
+                                            </span>
+                                        
+                                    </div>
+                                    <div class="col-12 mb-3 align-self-end">
+                                        <a class="btn btn-danger" href="/produno/delete/<%= produn.id %>">
+                                          Eliminar
+                                      </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Product -->
+                        <% }) %>
+  
+                    </div>
+                </div>
+            </div>
         </div>
-  </div>
-  <% }) %>
+        <!-- Category Products -->
 
 
-</div>
-     
-</div>
-</div>
-</div>
 
-      
+
+
+
+
 
 
 

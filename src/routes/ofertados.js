@@ -16,12 +16,12 @@ const { isAuthenticated } = require('../helpers/auth');
 
 
 router.post('/ofertados/new-ofertados',  async (req, res) => {
-  const { imagePath, product, color, talle, colorstock, tallestock, price } = req.body;
+  const { name, title, image, imagedos, imagetres, description, price } = req.body;
   const errors = [];
-  if (!imagePath) {
+  if (!image) {
     errors.push({text: 'Please Write a Title.'});
   }
-  if (!product) {
+  if (!title) {
     errors.push({text: 'Please Write a Description'});
   }
   if (!price) {
@@ -30,18 +30,19 @@ router.post('/ofertados/new-ofertados',  async (req, res) => {
   if (errors.length > 0) {
     res.render('notes/new-note', {
       errors,
-      imagePath,
-      product,
+      image,
+      title,
       price
     });
   } else {
-    const newNote = new Ofertados({imagePath, product, color, talle, colorstock, tallestock, price});
+    const newNote = new Ofertados({ name, title, image, imagedos, imagetres, description, price });
     //newNote.user = req.user.id;
     await newNote.save();
     req.flash('success_msg', 'Note Added Successfully');
-    res.redirect('/ofertados/add');
+    res.redirect('/');
   }
 });
+
 
 
 

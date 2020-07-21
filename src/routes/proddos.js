@@ -46,34 +46,34 @@ const { isAuthenticated } = require('../helpers/auth');
 
 
 
-router.post('/proddos/new-proddos',  async (req, res) => {
-  const { imagePath, product, color, talle, colorstock, tallestock, price } = req.body;
-  const errors = [];
-  if (!imagePath) {
-    errors.push({text: 'Please Write a Title.'});
-  }
-  if (!product) {
-    errors.push({text: 'Please Write a Description'});
-  }
-  if (!price) {
-    errors.push({text: 'Please Write a Description'});
-  }
-  if (errors.length > 0) {
-    res.render('notes/new-note', {
-      errors,
-      imagePath,
-      product,
-      price
-    });
-  } else {
-    const newNote = new Proddos({ imagePath, product, color, talle, colorstock, tallestock, price });
-    //newNote.user = req.user.id;
-    await newNote.save();
-    req.flash('success_msg', 'Note Added Successfully');
-    res.redirect('/proddos/add');
-  }
-});
-
+  router.post('/proddos/new-proddos',  async (req, res) => {
+    const { name, title, image, imagedos, imagetres, description, price } = req.body;
+    const errors = [];
+    if (!image) {
+      errors.push({text: 'Please Write a Title.'});
+    }
+    if (!title) {
+      errors.push({text: 'Please Write a Description'});
+    }
+    if (!price) {
+      errors.push({text: 'Please Write a Description'});
+    }
+    if (errors.length > 0) {
+      res.render('notes/new-note', {
+        errors,
+        image,
+        title,
+        price
+      });
+    } else {
+      const newNote = new Proddos({ name, title, image, imagedos, imagetres, description, price });
+      //newNote.user = req.user.id;
+      await newNote.save();
+      req.flash('success_msg', 'Note Added Successfully');
+      res.redirect('/proddos/add');
+    }
+  });
+  
 
 
 

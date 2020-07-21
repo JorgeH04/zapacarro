@@ -1,47 +1,84 @@
 <% include ../partials/_header %>
 
 
+<div class="col-12">
+        <!-- Main Content -->
+        <main class="row">
+            <div class="col-12 bg-white py-3 my-3">
+                <div class="row">
 
-<div class="container mt-5 p-4">
-        <div class="row">
+                    <!-- Product Images -->
+                    <div class="col-lg-5 col-md-12 mb-3">
+                        <div class="col-12 mb-3">
+                            <div class="img-large border" style="background-image: url('<%= ofertatres.image %>')"></div>
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-sm-2 col-3">
+                                    <div class="img-small border" style="background-image: url('<%= ofertatres.image %>')" data-src="<%= ofertatres.image %>"></div>
+                                </div>
+                                <div class="col-sm-2 col-3">
+                                    <div class="img-small border" style="background-image: url('<%= ofertatres.imagedos %>')" data-src="<%= ofertatres.imagedos %>"></div>
+                                </div>
+                                <div class="col-sm-2 col-3">
+                                    <div class="img-small border" style="background-image: url('<%= ofertatres.imagetres %>')" data-src="<%= ofertatres.imagetres %>"></div>
+                                </div>
+                                <div class="col-sm-2 col-3">
+                                    <div class="img-small border" style="background-image: url('images/image-4.jpg')" data-src="images/image-4.jpg"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product Images -->
 
-           <div class= "col-md-6 mt-5">
-                <div class="card text-center mx-auto" >
-                     <div class="card-body">
-                          <img src="<%= ofertatres.imagePath %>" class="img-fluid">
-                     </div>        
-                 </div>
+                    <!-- Product Info -->
+                    <div class="col-lg-5 col-md-9">
+                        <div class="col-12 product-name large">
+                            Area 51M Gaming Laptop Welcome to A New ERA with 9TH GEN Intel CORE I9-9900K NVIDIA GEFORCE RTX 2080 8GB GDDR6 17.3" FHD 144HZ AG G-SYNC TOBII EYETRACKING (1TB SSD RAID|32GB RAM|10 PRO)
+                            <small>By <a href="#">Dell</a></small>
+                        </div>
+                        <div class="col-12 px-0">
+                            <hr>
+                        </div>
+                        <div class="col-12">
+                            <ul>
+                                <li>Processor 8th Generation Intel Core i9-8950HK (6-Core, 12MB Cache, Overclocking up to 5.0GHz)</li>
+                                <li>Memory 32GB DDR4-2666MHz, 2x16GB Ram Speed Gaming Performance</li>
+                                <li>Hard Drive 1TB SSD RAID 0 (2x 512GB PCIe NVME M.2 SSDs) + 1TB (+8GB SSHD) Hybrid Drive</li>
+                                <li>17.3" Full HD display 1920 x 1080 resolution boasts impressive color and clarity. IPS technology for wide viewing angles.</li>
+                                <li>Video Card NVIDIA® GeForce® RTX 2080 with 8GB GDDR6</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Product Info -->
+
+                    <!-- Sidebar -->
+                    <div class="col-lg-2 col-md-3 text-center">
+                        <div class="col-12 border-left border-top sidebar h-100">
+                            <div class="row">
+                                <div class="col-12">
+                                <span class="detail-price">
+                                        <h2>$<%= ofertatres.price %></h2>
+                                </span>
+                            
+                                </div>
+                            
+                                <div class="col-12 mt-3">
+                                    <a href="/addtocardofertatres/<%= ofertatres.id %>" class="btn btn-outline-dark" role="button">Agregar al carro</a>
+                                </div>
+                 
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Sidebar -->
+
+                </div>
             </div>
-            <div class= "col-md-6 mt-5">
-     
-                <div class="card text-center mx-auto" >
-                     <div class="card-body">
-                         <h1>Talles y colores en stock:</h1>
-                           <h5><%= ofertatres.tallestock %></h2>
-                           <h5><%= ofertatres.colorstock %></h2>
-                           <br>
-                          <a href="/ofertatres/tallecolor/<%= ofertatres.id %>"class="btn btn-danger pull-right" role="button">Elija su talle y color</a>
-     
-                     </div>     
-                 </div>
-                <div class="card text-center mx-auto" >
-                     <div class="card-body">
-                         <h2><%= ofertatres.product %></h2>
-                         <h2>$<%= ofertatres.price %></h2>
-                     </div>  
-
-                     <div class="card-body">
-                          <a href="/addtocardofertatres/<%= ofertatres.id %>" class="btn btn-success pull-right" role="button">Agregar al carro</a>
-                     </div>       
-                 </div>
-            </div>
-     
-         </div>
-     </div>
-     
 
 
-
+        </main>
+        <!-- Main Content -->
+    </div>
 
 
 

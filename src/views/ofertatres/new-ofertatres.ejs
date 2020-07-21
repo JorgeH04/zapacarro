@@ -1,75 +1,100 @@
 <% include ../partials/_header %>
 
 
-
 <div class="col-md-4 mx-auto">
-  <div class="card text-center">
-    <div class="card-header">
-      <h3>Agregue un nuevo producto</h3>
-    </div>
-    <div class="card-body">
-      <form action="/ofertatres/new-ofertatres" method="POST">
-        <div class="form-group">
-          <input type="text" name="imagePath" class="form-control" placeholder="image" autofocus/>
-        </div>
-       <div class="form-group">
-          <input type="text" name="product" class="form-control" placeholder="product" autofocus/>
-        </div>
-        <div class="form-group">
-            <input type="text" name="talle" class="form-control" placeholder="talle" autofocus/>
+    <div class="card text-center">
+      <div class="card-header">
+        <h3>Agregue un nuevo producto</h3>
+      </div>
+      <div class="card-body">
+        <form action="/ofertatres/new-ofertatres" method="POST">
+          <div class="form-group">
+            <input type="text" name="name" class="form-control" placeholder="name" autofocus/>
           </div>
-                 <div class="form-group">
-            <input type="text" name="color" class="form-control" placeholder="color" autofocus/>
+         <div class="form-group">
+            <input type="text" name="title" class="form-control" placeholder="title" autofocus/>
           </div>
-                 <div class="form-group">
-            <input type="text" name="tallestock" class="form-control" placeholder="tallestock" autofocus/>
+          <div class="form-group">
+              <input type="text" name="image" class="form-control" placeholder="imagen 1" autofocus/>
+            </div>
+            <div class="form-group">
+              <input type="text" name="imagedos" class="form-control" placeholder="imagen 2" autofocus/>
+            </div>
+            <div class="form-group">
+              <input type="text" name="imagetres" class="form-control" placeholder="imagen 3" autofocus/>
+            </div>
+                   <div class="form-group">
+              <input type="text" name="description" class="form-control" placeholder="descripcion" autofocus/>
+            </div>
+                   <div class="form-group">
+              <input type="text" name="price" class="form-control" placeholder="precio" autofocus/>
+            </div>
+                   
+          <div class="form-group">
+            <button class="btn btn-primary btn-block" type="submit">
+              Save
+            </button>
           </div>
-                 <div class="form-group">
-            <input type="text" name="colorstock" class="form-control" placeholder="colorstock" autofocus/>
-          </div>
-        <div class="form-group">
-          <input type="number" name="price" class="form-control" placeholder="price" autofocus/>
-        </div>
-        <div class="form-group">
-          <button class="btn btn-primary btn-block" type="submit">
-            Save
-          </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
-</div>
-
-
   
-    <div class="products-center">
-            <!-- single product -->
-            <% for(var i = 0; i < ofertatres.length; i++) { %>
-              <article class="product">
-         <div class="col-md-4 text-center">
-          
-          <div class="img-container">
-              <a href="/ofertatresbackend/<%= ofertatres[i].id %>">
-                 <img src="<%= ofertatres[i].imagePath %>" alt="product" class="product-img" />
-              </a>
-            </div>
-        </div>
-            <h3>  <%= ofertatres[i].product %> </h3>
-            <h4> <%= ofertatres[i].price %> </h4>
-            <a class="btn btn-danger" href="/ofertatres/delete/<%= ofertatres[i].id %>">
-              Eliminar
-          </a>
-
-          </article>
-          <% } %>
-          <!-- end of single product -->
-          
+  
+    
+  <div class="col-12">
+      <!-- Main Content -->
+      <main class="row">
+    
+          <!-- Category Products -->
+          <div class="col-12">
+              <div class="row">
+                  <div class="col-12 py-3">
+                      <div class="row">
+                          <div class="col-12 text-center text-uppercase">
+                              <h2>Computers</h2>
+                          </div>
+                      </div>
+                      <div class="row">
+                            <% ofertatres.forEach(function (ofertatre) { %>
+    
+                          <!-- Product -->
+                          <div class="col-xl-2 col-lg-3 col-sm-6 my-3">
+                              <div class="col-12 bg-white text-center h-100 product-item">
+                                  <div class="row h-100">
+                                      <div class="col-12 p-0 mb-3">
+                                          <a href="/ofertatresredirect/<%= ofertatre.id %>">
+                                              <img src="<%= ofertatre.image %>" class="img-fluid">
+                                          </a>
+                                      </div>
+                                      <div class="col-12 mb-3">
+                                            <%= ofertatre.title %> 
+                                      </div>
+                                      <div class="col-12 mb-3">
+                                              <span class="product-price-old">
+                                                  $<%= ofertatre.price %> 
+                                              </span>
+                                          
+                                      </div>
+                                      <a class="btn btn-danger" href="/ofertatres/delete/<%= ofertatre.id %>">
+                                        Eliminar
+                                    </a>
+                                  </div>
+                              </div>
+                          </div>
+                          <!-- Product -->
+                          <% }) %>
+    
+                      </div>
+                  </div>
+              </div>
           </div>
-          </section>
-            </div>
-          </div>
-        </div>
+          <!-- Category Products -->
 
 
  <% include ../partials/_footer %>
         
+        
+
+  
+

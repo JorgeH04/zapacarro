@@ -40,38 +40,65 @@
 </div>
 
 
-  
-    <div class="products-center">
-            <!-- single product -->
-            <% for(var i = 0; i < ofertauno.length; i++) { %>
-              <article class="product">
-         <div class="col-md-4 text-center">
-          
-          <div class="img-container">
-              <a href="/ofertaunoredirect/<%= ofertauno[i].id %>">
-                 <img src="<%= ofertauno[i].image %>" alt="product" class="product-img" />
-              </a>   
-          </div>
-          <div class="img-container">
-               <img src="<%= ofertauno[i].imagedos %>" alt="product" class="product-img" />
-        </div>
-        </div>
 
-            <h3>  <%= ofertauno[i].description %> </h3>
-            <h4> <%= ofertauno[i].price %> </h4>
-            <a class="btn btn-danger" href="/ofertauno/delete/<%= ofertauno[i].id %>">
-              Eliminar
-          </a>
 
-          </article>
-          <% } %>
-          <!-- end of single product -->
+
+
+
+
+        
+        <div class="col-12">
+            <!-- Main Content -->
+            <main class="row">
           
-          </div>
-          </section>
-            </div>
-          </div>
-        </div>
+                <!-- Category Products -->
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-12 py-3">
+                            <div class="row">
+                                <div class="col-12 text-center text-uppercase">
+                                    <h2>Computers</h2>
+                                </div>
+                            </div>
+                            <div class="row">
+                                  <% ofertauno.forEach(function (ofertaun) { %>
+          
+                                <!-- Product -->
+                                <div class="col-xl-2 col-lg-3 col-sm-6 my-3">
+                                    <div class="col-12 bg-white text-center h-100 product-item">
+                                        <div class="row h-100">
+                                            <div class="col-12 p-0 mb-3">
+                                                <a href="/ofertaunoredirect/<%= ofertaun.id %>">
+                                                    <img src="<%= ofertaun.image %>" class="img-fluid">
+                                                </a>
+                                            </div>
+                                            <div class="col-12 mb-3">
+                                                  <%= ofertaun.title %> 
+                                            </div>
+                                            <div class="col-12 mb-3">
+                                                    <span class="product-price-old">
+                                                        $<%= ofertaun.price %> 
+                                                    </span>
+                                                
+                                            </div>
+                                            <a class="btn btn-danger" href="/ofertauno/delete/<%= ofertaun.id %>">
+                                              Eliminar
+                                          </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Product -->
+                                <% }) %>
+          
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Category Products -->
+          
+
+
+
 
 
         <% include ../partials/_footer %>

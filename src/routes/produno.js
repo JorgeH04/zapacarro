@@ -166,6 +166,16 @@ router.get('/addtocardproduno/:id', function(req, res, next){
   });
 });
 
+
+router.get('/sumar/:id', function(req, res, next){
+  var productId = req.params.id;
+  var cart = new Cart(req.session.cart ? req.session.cart : {});
+
+  cart.sumar(productId);
+  req.session.cart = cart;
+  res.redirect('/shopcart');
+});
+
 router.get('/reduce/:id', function(req, res, next){
   var productId = req.params.id;
   var cart = new Cart(req.session.cart ? req.session.cart : {});
