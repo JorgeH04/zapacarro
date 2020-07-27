@@ -12,6 +12,7 @@
                             <div class="col-12 text-center text-uppercase">
                                 <h2>Computers</h2>
                             </div>
+                         
                         </div>
                         <div class="row">
                               <% prodtres.forEach(function (prodtre) { %>
@@ -30,7 +31,7 @@
                                         </div>
                                         <div class="col-12 mb-3">
                                                 <span class="product-price-old">
-                                                    $<%= produn.price %> 
+                                                    $<%= prodtre.price %> 
                                                 </span>
                                             
                                         </div>
@@ -48,29 +49,69 @@
                 </div>
             </div>
             <!-- Category Products -->
-      
             <div class="col-12">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><i class="fas fa-long-arrow-alt-left"></i></a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item active" aria-current="page">
-                            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#"><i class="fas fa-long-arrow-alt-right"></i></a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-      
-        </main>
-        <!-- Main Content -->
-      </div>
-      
+                <div class="row">
+                      <!-- pagination -->
+                      <% if(pages > 0) { %> <!-- show pagination if there is pages -->
+                        <nav  class="mx-auto" style="margin-bottom: 50px">
+                          <ul class="pagination">
+                            <!-- FIRST ITEM -->
+                            <% if(current == 1) { %>
+                              <li class="page-item disabled">
+                                <a class="page-link" href="#">First</a>
+                              </li>
+                            <% } else { %>
+                              <li class="page-item">
+                                <a class="page-link" href="/prodtresindex/1">First</a>
+                              </li>
+                            <% } %>
+                            <!-- ITEMS  -->
+                            <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                            <% if(i !== 1) { %>
+                              <li class="page-item disabled">
+                                <a class="page-link" href="#">...</a>
+                              </li>
+                            <% } %>
+                            <% for(; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                              <% if(i == current) { %>
+                                <li class="page-item active">
+                                  <a class="page-link" href="<%= i %>">
+                                    <%= i %>
+                                  </a>
+                                </li>
+                              <% } else { %>
+                                <li class="page-item">
+                                  <a class="page-link" href="/prodtresindex/<%= i %>">
+                                    <%= i %>
+                                  </a>
+                                </li>
+                              <% } %>
+                              <% if (i == Number(current) + 4 && i < pages) { %>
+                                 <li class="page-item disabled">
+                                   <a class="page-link" href="#">...</a>
+                                 </li>
+                              <% } %>
+                            <% } %>
+                            <!-- LAST ITEM -->
+                            <% if(current == pages) { %>
+                              <li class="page-item disabled">
+                                <a class="page-link" href="#">
+                                  Last
+                                </a>
+                              </li>
+                            <% } else { %>
+                              <li class="page-item">
+                                <a class="page-link" href="/prodtresindex/<%= pages %>">
+                                  Last
+                                </a>
+                              </li>
+                            <% } %>
+                          </ul>
+                        </nav>
+                      <% } %>
+                    </div>
+                  </div>
+          
       
       
       

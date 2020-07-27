@@ -42,30 +42,68 @@
 
 
   
-<div class="row mt-5">
-    <% prodcuatro.forEach(function (prodcuatr) { %>
-      <div class="col-md-3 ">
-       <div class="card"> 
-          <a href="/prodcuatrobackend/<%= prodcuatr.id %>">
-         <img class="card-img-top img-fluid" alt="img1" src="<%= prodcuatr.imagePath %>">
-          </a>
-          <div class="card-body">
-        <div class="card-heading"><%= prodcuatr.product %></div>
-        <h4> $<%= prodcuatr.price %>  </h4>
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit neque, mollitia dolorem. </p>
-        <a class="btn btn-pink text-light"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To Cart</a> </div>
-        <a class="btn btn-danger" href="/prodcuatro/delete/<%= prodcuatr.id %>">
-          Eliminar
-      </a>
-        </div>
-  </div>
-  <% }) %>
+<div class="col-12">
+  <!-- Main Content -->
+  <main class="row">
 
+      <!-- Category Products -->
+      <div class="col-12">
+          <div class="row">
+              <div class="col-12 py-3">
+                  <div class="row">
+                      <div class="col-12 text-center text-uppercase">
+                          <h2>Computers</h2>
+                      </div>
 
-</div>
-     
-</div>
-</div>
+                      <form action="/searchback" method="GET">
+                        <div class="form-group" >
+                            <div class="input-group">
+                                <input type="text"  name="search" class="form-control border-dark" placeholder="Buscar productos" required>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-dark"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                  </div>
+                  <div class="row">
+                        <% prodcuatro.forEach(function (prodcuatr) { %>
+
+                      <!-- Product -->
+                      <div class="col-xl-2 col-lg-3 col-sm-6 my-3">
+                          <div class="col-12 bg-white text-center h-100 product-item">
+                              <div class="row h-100">
+                                  <div class="col-12 p-0 mb-3">
+                                      <a href="/prodcuatroredirect/<%= proddo.id %>">
+                                          <img src="<%= prodcuatr.image %>" class="img-fluid">
+                                      </a>
+                                  </div>
+                                  <div class="col-12 mb-3">
+                                        <%= prodcuatr.title %> 
+                                  </div>
+                                  <div class="col-12 mb-3">
+                                          <span class="product-price-old">
+                                              $<%= prodcuatr.price %> 
+                                          </span>
+                                      
+                                  </div>
+                                  <a class="btn btn-danger" href="/prodcuatro/delete/<%= prodcuatr.id %>">
+                                    Eliminar
+                                  </a>
+                                  <a class="btn btn-primary" href="/prodcuatro/edit/<%= prodcuatr.id %>">
+                                    Editar
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- Product -->
+                      <% }) %>
+
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- Category Products -->
 
 
 

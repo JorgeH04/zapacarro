@@ -42,27 +42,57 @@
 
 
   
-<div class="row mt-5">
-    <% prodseis.forEach(function (prodsei) { %>
-      <div class="col-md-3 ">
-       <div class="card"> 
-          <a href="/prodseisbackend/<%= prodsei.id %>">
-         <img class="card-img-top img-fluid" alt="img1" src="<%= prodsei.imagePath %>">
-          </a>
-          <div class="card-body">
-        <div class="card-heading"><%= prodsei.product %></div>
-        <h4> $<%= prodsei.price %>  </h4>
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit neque, mollitia dolorem. </p>
-        <a class="btn btn-pink text-light"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To Cart</a> </div>
-        <a class="btn btn-danger" href="/prodseis/delete/<%= prodsei.id %>">
-          Eliminar
-      </a>
-        </div>
-  </div>
-  <% }) %>
-</div>
-</div>
-</div>
-</div>
+<div class="col-12">
+  <!-- Main Content -->
+  <main class="row">
+
+      <!-- Category Products -->
+      <div class="col-12">
+          <div class="row">
+              <div class="col-12 py-3">
+                  <div class="row">
+                      <div class="col-12 text-center text-uppercase">
+                          <h2>Computers</h2>
+                      </div>
+                  </div>
+                  <div class="row">
+                        <% prodseis.forEach(function (prodsei) { %>
+
+                      <!-- Product -->
+                      <div class="col-xl-2 col-lg-3 col-sm-6 my-3">
+                          <div class="col-12 bg-white text-center h-100 product-item">
+                              <div class="row h-100">
+                                  <div class="col-12 p-0 mb-3">
+                                      <a href="/prodseisredirect/<%= prodsei.id %>">
+                                          <img src="<%= prodsei.image %>" class="img-fluid">
+                                      </a>
+                                  </div>
+                                  <div class="col-12 mb-3">
+                                        <%= prodsei.title %> 
+                                  </div>
+                                  <div class="col-12 mb-3">
+                                          <span class="product-price-old">
+                                              $<%= prodsei.price %> 
+                                          </span>
+                                      
+                                  </div>
+                                  <a class="btn btn-danger" href="/prodseis/delete/<%= prodsei.id %>">
+                                    Eliminar
+                                  </a>
+                                  <a class="btn btn-primary" href="/prodseis/edit/<%= prodsei.id %>">
+                                    Editar
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- Product -->
+                      <% }) %>
+
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- Category Products -->
+
         <% include ../partials/_footer %>
         

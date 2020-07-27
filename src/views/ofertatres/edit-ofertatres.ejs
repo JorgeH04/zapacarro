@@ -10,24 +10,32 @@
       <div class="card-body">
         <form action="/ofertatres/edit/<%= ofertatres._id %>" method="POST">
           <input type="hidden" name="_method" value="PUT">
+
+
+
           <div class="form-group">
-            <input type="text" name="product" class="form-control" value="<%= ofertatres.product %>" placeholder="Edite el nombre del producto"/>
+            <input type="text" name="name" class="form-control" placeholder="name" value="<%= ofertados.name %>"  autofocus/>
+          </div>
+         <div class="form-group">
+            <input type="text" name="title" class="form-control" placeholder="title" value="<%= ofertados.title %>" autofocus/>
           </div>
           <div class="form-group">
-            <input type="text" name="talle" class="form-control" value="<%= ofertatres.talle %>" placeholder="Edite los talles en stock"/>
-          </div>
-          <div class="form-group">
-            <input type="text" name="color" class="form-control" value="<%= ofertatres.color %>" placeholder="Edite los colores en stock"/>
-          </div>
-          <div class="form-group">
-            <input type="text" name="tallestock" class="form-control" value="<%= ofertatres.tallestock %>" placeholder="Edite los talles en stock"/>
-          </div>
-          <div class="form-group">
-            <input type="text" name="colorstock" class="form-control" value="<%= ofertatres.colorstock %>" placeholder="Edite los colores en stock"/>
-          </div>
-          <div class="form-group">
-            <input type="number" name="price" class="form-control" value="<%= ofertatres.price %>" placeholder="Edite el precio"/>
-          </div>
+              <input type="text" name="image" class="form-control" placeholder="imagen 1" value="<%= ofertados.image %>" autofocus/>
+            </div>
+            <div class="form-group">
+              <input type="text" name="imagedos" class="form-control" placeholder="imagen 2" value="<%= ofertados.imagedos %>" autofocus/>
+            </div>
+            <div class="form-group">
+              <input type="text" name="imagetres" class="form-control" placeholder="imagen 3" value="<%= ofertados.imagetres %>" autofocus/>
+            </div>
+                   <div class="form-group">
+              <input type="text" name="description" class="form-control" placeholder="descripcion" value="<%= ofertados.description %>" autofocus/>
+            </div>
+                   <div class="form-group">
+              <input type="text" name="price" class="form-control" placeholder="precio" value="<%= ofertados.price %>" autofocus/>
+            </div>
+
+
           <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit">
               Save

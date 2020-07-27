@@ -54,6 +54,16 @@
                         <div class="col-12 text-center text-uppercase">
                             <h2>Computers</h2>
                         </div>
+                        <form action="/searchback" method="GET">
+                          <div class="form-group" >
+                              <div class="input-group">
+                                  <input type="text"  name="search" class="form-control border-dark" placeholder="Buscar productos" required>
+                                  <div class="input-group-append">
+                                      <button class="btn btn-outline-dark"><i class="fas fa-search"></i></button>
+                                  </div>
+                              </div>
+                          </div>
+                      </form>
                     </div>
                     <div class="row">
                           <% proddos.forEach(function (proddo) { %>
@@ -77,8 +87,11 @@
                                         
                                     </div>
                                     <a class="btn btn-danger" href="/proddos/delete/<%= proddo.id %>">
-                                      Eliminar
-                                  </a>
+                                        Eliminar
+                                    </a>
+                                    <a class="btn btn-primary" href="/proddos/edit/<%= proddo.id %>">
+                                        Editar
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -90,6 +103,76 @@
             </div>
         </div>
         <!-- Category Products -->
+
+
+
+        <div class="col-12">
+          <div class="row">
+                <!-- pagination -->
+                <% if(pages > 0) { %> <!-- show pagination if there is pages -->
+                  <nav  class="mx-auto" style="margin-bottom: 50px">
+                    <ul class="pagination">
+                      <!-- FIRST ITEM -->
+                      <% if(current == 1) { %>
+                        <li class="page-item disabled">
+                          <a class="page-link" href="#">First</a>
+                        </li>
+                      <% } else { %>
+                        <li class="page-item">
+                          <a class="page-link" href="/proddosback/1">First</a>
+                        </li>
+                      <% } %>
+                      <!-- ITEMS  -->
+                      <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                      <% if(i !== 1) { %>
+                        <li class="page-item disabled">
+                          <a class="page-link" href="#">...</a>
+                        </li>
+                      <% } %>
+                      <% for(; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                        <% if(i == current) { %>
+                          <li class="page-item active">
+                            <a class="page-link" href="<%= i %>">
+                              <%= i %>
+                            </a>
+                          </li>
+                        <% } else { %>
+                          <li class="page-item">
+                            <a class="page-link" href="/proddosback/<%= i %>">
+                              <%= i %>
+                            </a>
+                          </li>
+                        <% } %>
+                        <% if (i == Number(current) + 4 && i < pages) { %>
+                           <li class="page-item disabled">
+                             <a class="page-link" href="#">...</a>
+                           </li>
+                        <% } %>
+                      <% } %>
+                      <!-- LAST ITEM -->
+                      <% if(current == pages) { %>
+                        <li class="page-item disabled">
+                          <a class="page-link" href="#">
+                            Last
+                          </a>
+                        </li>
+                      <% } else { %>
+                        <li class="page-item">
+                          <a class="page-link" href="/proddosback/<%= pages %>">
+                            Last
+                          </a>
+                        </li>
+                      <% } %>
+                    </ul>
+                  </nav>
+                <% } %>
+              </div>
+            </div>
+    
+
+          </main>
+          <!-- Main Content -->
+        </div>
   
   
 

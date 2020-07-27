@@ -42,31 +42,57 @@
 
 
   
-<div class="row mt-5">
-    <% prodcinco.forEach(function (prodcinc) { %>
-      <div class="col-md-3 ">
-       <div class="card"> 
-          <a href="/prodcincobackend/<%= prodcinc.id %>">
-         <img class="card-img-top img-fluid" alt="img1" src="<%= prodcinc.imagePath %>">
-          </a>
-          <div class="card-body">
-        <div class="card-heading"><%= prodcinc.product %></div>
-        <h4> $<%= prodcinc.price %>  </h4>
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit neque, mollitia dolorem. </p>
-        <a class="btn btn-pink text-light"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To Cart</a> </div>
-        <a class="btn btn-danger" href="/prodcinco/delete/<%= prodcinc.id %>">
-          Eliminar
-      </a>
-        </div>
-  </div>
-  <% }) %>
+<div class="col-12">
+  <!-- Main Content -->
+  <main class="row">
 
+      <!-- Category Products -->
+      <div class="col-12">
+          <div class="row">
+              <div class="col-12 py-3">
+                  <div class="row">
+                      <div class="col-12 text-center text-uppercase">
+                          <h2>Computers</h2>
+                      </div>
+                  </div>
+                  <div class="row">
+                        <% prodcinco.forEach(function (prodcinc) { %>
 
+                      <!-- Product -->
+                      <div class="col-xl-2 col-lg-3 col-sm-6 my-3">
+                          <div class="col-12 bg-white text-center h-100 product-item">
+                              <div class="row h-100">
+                                  <div class="col-12 p-0 mb-3">
+                                      <a href="/prodcincoredirect/<%= prodcinc.id %>">
+                                          <img src="<%= prodcinc.image %>" class="img-fluid">
+                                      </a>
+                                  </div>
+                                  <div class="col-12 mb-3">
+                                        <%= prodcinc.title %> 
+                                  </div>
+                                  <div class="col-12 mb-3">
+                                          <span class="product-price-old">
+                                              $<%= prodcinc.price %> 
+                                          </span>
+                                      
+                                  </div>
+                                  <a class="btn btn-danger" href="/prodcinco/delete/<%= prodcinc.id %>">
+                                    Eliminar
+                                  </a>
+                                  <a class="btn btn-primary" href="/prodcinco/edit/<%= prodcinc.id %>">
+                                    Editar
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- Product -->
+                      <% }) %>
 
-</div>
-     
-</div>
-</div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- Category Products -->
 
 
 

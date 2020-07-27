@@ -67,7 +67,7 @@ app.use(require('./routes/ofertatres'));
 app.use(require('./routes/produno'));
 app.use(require('./routes/proddos'));
 app.use(require('./routes/prodtres'));
-//app.use(require('./routes/prodcuatro'));
+app.use(require('./routes/prodcuatro'));
 //app.use(require('./routes/prodcinco'));
 //app.use(require('./routes/prodseis'));
 

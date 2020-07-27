@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-// Stripe
-//const stripe = require('stripe')('sk_test_rCp23dn4fDasEqfGiVkhHvii00SyEkd4GS');
 
 
 // Models
@@ -14,12 +12,46 @@ const Order = require('../models/order');
 const { isAuthenticated } = require('../helpers/auth');
 
 
+////////////////////////////////////////////////////////////////////////
 
 
-//router.get('/proddosindex', async (req, res) => {
-//    const proddos = await Proddos.find();
-//    res.render('proddos/proddos', { proddos });
-//  });
+router.post('/proddos/new-proddos',  async (req, res) => {
+  const { name, title, image, imagedos, imagetres, description, price } = req.body;
+  const errors = [];
+  if (!image) {
+    errors.push({text: 'Please Write a Title.'});
+  }
+  if (!title) {
+    errors.push({text: 'Please Write a Description'});
+  }
+  if (!price) {
+    errors.push({text: 'Please Write a Description'});
+  }
+  if (errors.length > 0) {
+    res.render('notes/new-note', {
+      errors,
+      image,
+      title,
+      price
+    });
+  } else {
+    const newNote = new Proddos({ name, title, image, imagedos, imagetres, description, price });
+    //newNote.user = req.user.id;
+    await newNote.save();
+    req.flash('success_msg', 'Note Added Successfully');
+    res.redirect('/proddosback/1');
+  }
+});
+
+
+router.get('/proddosredirect/:id', async (req, res) => {
+  const { id } = req.params;
+  const proddos = await Proddos.findById(id);
+  res.render('proddos/proddosredirect', {proddos});
+});
+
+
+//////////////////////////////////////////////////////////////////////
 
   router.get('/proddosindex/:page', async (req, res) => {
     let perPage = 8;
@@ -45,32 +77,44 @@ const { isAuthenticated } = require('../helpers/auth');
   
 
 
-
-  router.post('/proddos/new-proddos',  async (req, res) => {
-    const { name, title, image, imagedos, imagetres, description, price } = req.body;
-    const errors = [];
-    if (!image) {
-      errors.push({text: 'Please Write a Title.'});
-    }
-    if (!title) {
-      errors.push({text: 'Please Write a Description'});
-    }
-    if (!price) {
-      errors.push({text: 'Please Write a Description'});
-    }
-    if (errors.length > 0) {
-      res.render('notes/new-note', {
-        errors,
-        image,
-        title,
-        price
-      });
+  router.get("/search", function(req, res){
+    let perPage = 8;
+    let page = req.params.page || 1;
+  
+    var noMatch = null;
+    if(req.query.search) {
+        const regex = new RegExp(escape(req.query.search), 'gi');
+        // Get all campgrounds from DB
+        console.log(req.query.search)
+        Proddos
+        // finding all documents
+        .find({title: regex}) 
+        .sort({ _id: -1 })
+        .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
+        .limit(perPage) // output just 9 items
+        .exec((err, proddos) => {
+         Proddos.countDocuments((err, count) => {
+          if (err) return next(err);
+              res.render("proddos/proddos",{
+                proddos, 
+                current: page,
+                pages: Math.ceil(count / perPage)
+              });
+            });
+          });
     } else {
-      const newNote = new Proddos({ name, title, image, imagedos, imagetres, description, price });
-      //newNote.user = req.user.id;
-      await newNote.save();
-      req.flash('success_msg', 'Note Added Successfully');
-      res.redirect('/proddos/add');
+        // Get all campgrounds from DB
+        Proddos.find({}, function(err, proddos){
+           if(err){
+               console.log(err);
+           } else {
+              res.render("produno/produno",{
+                proddos,
+                current: page,
+                pages: Math.ceil(count / perPage)
+                });
+           }
+        });
     }
   });
   
@@ -79,34 +123,77 @@ const { isAuthenticated } = require('../helpers/auth');
 
 
 
-router.get('/proddosredirect/:id', async (req, res) => {
-  const { id } = req.params;
-  const proddos = await Proddos.findById(id);
-  res.render('proddos/proddosredirect', {proddos});
+
+
+
+//////////////////////////////////////////////////////////////////////
+
+router.get('/proddosback/:page', async (req, res) => {
+  let perPage = 8;
+  let page = req.params.page || 1;
+
+  Proddos
+  .find({}) // finding all documents
+  .sort({ timestamp: -1 })
+  .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
+  .limit(perPage) // output just 9 items
+  .exec((err, proddos) => {
+    Proddos.countDocuments((err, count) => { // count to calculate the number of pages
+      if (err) return next(err);
+      res.render('proddos/new-proddos', {
+        proddos,
+        current: page,
+        pages: Math.ceil(count / perPage)
+      });
+    });
+  });
 });
 
 
 
 
+router.get("/searchback", function(req, res){
+  let perPage = 8;
+  let page = req.params.page || 1;
 
-
-
-
-// New product
-router.get('/proddos/add',  async (req, res) => {
-  const proddos = await Proddos.find();
-  res.render('proddos/new-proddos',  { proddos });
+  var noMatch = null;
+  if(req.query.search) {
+      const regex = new RegExp(escape(req.query.search), 'gi');
+      // Get all campgrounds from DB
+      console.log(req.query.search)
+      Proddos
+      .find({title: regex}) 
+      .sort({ _id: -1 })
+      .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
+      .limit(perPage) // output just 9 items
+      .exec((err, produno) => {
+       Proddos.countDocuments((err, count) => {
+        if (err) return next(err);
+            res.render("proddos/new-proddos",{
+              proddos, 
+              current: page,
+              pages: Math.ceil(count / perPage)
+            });
+          });
+        });
+  } else {
+      // Get all campgrounds from DB
+      Proddos.find({}, function(err, proddos){
+         if(err){
+             console.log(err);
+         } else {
+            res.render("produno/new-produno",{
+              proddos,
+              current: page,
+              pages: Math.ceil(count / perPage)
+              });
+         }
+      });
+  }
 });
 
 
-router.get('/proddosbackend/:id', async (req, res) => {
-  const { id } = req.params;
-  const proddos = await Proddos.findById(id);
-   res.render('proddos/proddosbackend', {proddos});
-});
-
-
-
+/////////////////////////////////////////////////////////////////////
 
 // talle y color
 router.get('/proddos/tallecolor/:id',  async (req, res) => {

@@ -8,31 +8,34 @@
         <h3>Edite su producto</h3>
       </div>
       <div class="card-body">
-        <form action="/produno/edit/<%= produno._id %>" method="POST">
+        <form action="/ofertauno/edit/<%= ofertauno._id %>" method="POST">
           <input type="hidden" name="_method" value="PUT">
-         
+
+
+
 
           <div class="form-group">
             <input type="text" name="name" class="form-control" placeholder="name" value="<%= produno.name %>"  autofocus/>
           </div>
          <div class="form-group">
-            <input type="text" name="title" class="form-control" placeholder="title" value="<%= produno.title %>" autofocus/>
+            <input type="text" name="title" class="form-control" placeholder="title" value="<%= ofertauno.title %>" autofocus/>
           </div>
           <div class="form-group">
-              <input type="text" name="image" class="form-control" placeholder="imagen 1" value="<%= produno.image %>" autofocus/>
+              <input type="text" name="image" class="form-control" placeholder="imagen 1" value="<%= ofertauno.image %>" autofocus/>
             </div>
             <div class="form-group">
-              <input type="text" name="imagedos" class="form-control" placeholder="imagen 2" value="<%= produno.imagedos %>" autofocus/>
+              <input type="text" name="imagedos" class="form-control" placeholder="imagen 2" value="<%= ofertauno.imagedos %>" autofocus/>
             </div>
             <div class="form-group">
-              <input type="text" name="imagetres" class="form-control" placeholder="imagen 3" value="<%= produno.imagetres %>" autofocus/>
+              <input type="text" name="imagetres" class="form-control" placeholder="imagen 3" value="<%= ofertauno.imagetres %>" autofocus/>
             </div>
                    <div class="form-group">
-              <input type="text" name="description" class="form-control" placeholder="descripcion" value="<%= produno.description %>" autofocus/>
+              <input type="text" name="description" class="form-control" placeholder="descripcion" value="<%= ofertauno.description %>" autofocus/>
             </div>
                    <div class="form-group">
-              <input type="text" name="price" class="form-control" placeholder="precio" value="<%= produno.price %>" autofocus/>
+              <input type="text" name="price" class="form-control" placeholder="precio" value="<%= ofertauno.price %>" autofocus/>
             </div>
+     
 
 
 

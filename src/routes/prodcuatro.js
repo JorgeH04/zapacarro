@@ -1,14 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-// Stripe
-//const stripe = require('stripe')('sk_test_rCp23dn4fDasEqfGiVkhHvii00SyEkd4GS');
-
 
 // Models
 const Prodcuatro = require('../models/prodcuatro');
 const Cart = require('../models/cart');
-//const Order = require('../models/order');
 
 // Helpers
 const { isAuthenticated } = require('../helpers/auth');
@@ -16,22 +12,19 @@ const { isAuthenticated } = require('../helpers/auth');
 
 
 
-router.get('/prodcuatroindex', async (req, res) => {
-  const prodcuatro = await Prodcuatro.find();
-  res.render('prodcuatro/prodcuatro', { prodcuatro });
-});
+////////////////////////////////////////////////////////////////////////////
 
 
 
 
 
 router.post('/prodcuatro/new-prodcuatro',  async (req, res) => {
-  const { imagePath, product, color, talle, colorstock, tallestock, price } = req.body;
+  const { name, title, image, imagedos, imagetres, description, price } = req.body;
   const errors = [];
-  if (!imagePath) {
+  if (!image) {
     errors.push({text: 'Please Write a Title.'});
   }
-  if (!product) {
+  if (!title) {
     errors.push({text: 'Please Write a Description'});
   }
   if (!price) {
@@ -40,19 +33,18 @@ router.post('/prodcuatro/new-prodcuatro',  async (req, res) => {
   if (errors.length > 0) {
     res.render('notes/new-note', {
       errors,
-      imagePath,
-      product,
+      image,
+      title,
       price
     });
   } else {
-    const newNote = new Prodcuatro({ imagePath, product, color, talle, colorstock, tallestock, price });
+    const newNote = new Prodcuatro({ name, title, image, imagedos, imagetres, description, price });
     //newNote.user = req.user.id;
     await newNote.save();
     req.flash('success_msg', 'Note Added Successfully');
-    res.redirect('/prodcuatro/add');
+    res.redirect('/prodcuatroback/1');
   }
 });
-
 
 
 
@@ -68,21 +60,151 @@ router.get('/prodcuatroredirect/:id', async (req, res) => {
 
 
 
+//////////////////////////////////////////////////////////////////////
 
+router.get('/prodcuatroindex/:page', async (req, res) => {
+  let perPage = 8;
+  let page = req.params.page || 1;
 
-
-// New product
-router.get('/prodcuatro/add',  async (req, res) => {
-  const prodcuatro = await Prodcuatro.find();
-  res.render('prodcuatro/new-prodcuatro',  { prodcuatro });
+  Prodcuatro
+  .find({}) // finding all documents
+  .sort({ timestamp: -1 })
+  .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
+  .limit(perPage) // output just 9 items
+  .exec((err, proddos) => {
+    Prodcuatro.countDocuments((err, count) => { // count to calculate the number of pages
+      if (err) return next(err);
+      res.render('prodcuatro/prodcuatro', {
+        prodcuatro,
+        current: page,
+        pages: Math.ceil(count / perPage)
+      });
+    });
+  });
 });
 
 
-router.get('/prodcuatrobackend/:id', async (req, res) => {
-  const { id } = req.params;
-  const prodcuatro = await Prodcuatro.findById(id);
-   res.render('prodcuatro/prodcuatrobackend', {prodcuatro});
+
+
+router.get("/search", function(req, res){
+  let perPage = 8;
+  let page = req.params.page || 1;
+
+  var noMatch = null;
+  if(req.query.search) {
+      const regex = new RegExp(escape(req.query.search), 'gi');
+      // Get all campgrounds from DB
+      console.log(req.query.search)
+      Prodcuatro
+      // finding all documents
+      .find({title: regex}) 
+      .sort({ _id: -1 })
+      .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
+      .limit(perPage) // output just 9 items
+      .exec((err, prodcuatro) => {
+       Prodcuatro.countDocuments((err, count) => {
+        if (err) return next(err);
+            res.render("prodcuatro/prodcuatro",{
+              prodcuatro, 
+              current: page,
+              pages: Math.ceil(count / perPage)
+            });
+          });
+        });
+  } else {
+      // Get all campgrounds from DB
+      Prodcuatro.find({}, function(err, prodcuatro){
+         if(err){
+             console.log(err);
+         } else {
+            res.render("prodcuatro/prodcuatro",{
+              prodcuatro,
+              current: page,
+              pages: Math.ceil(count / perPage)
+              });
+         }
+      });
+  }
 });
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////
+
+router.get('/prodcuatroback/:page', async (req, res) => {
+let perPage = 8;
+let page = req.params.page || 1;
+
+Prodcuatro
+.find({}) // finding all documents
+.sort({ timestamp: -1 })
+.skip((perPage * page) - perPage) // in the first page the value of the skip is 0
+.limit(perPage) // output just 9 items
+.exec((err, prodcuatro) => {
+  Prodcuatro.countDocuments((err, count) => { // count to calculate the number of pages
+    if (err) return next(err);
+    res.render('prodcuatro/new-prodcuatro', {
+      prodcuatro,
+      current: page,
+      pages: Math.ceil(count / perPage)
+    });
+  });
+});
+});
+
+
+
+
+router.get("/searchback", function(req, res){
+let perPage = 8;
+let page = req.params.page || 1;
+
+var noMatch = null;
+if(req.query.search) {
+    const regex = new RegExp(escape(req.query.search), 'gi');
+    // Get all campgrounds from DB
+    console.log(req.query.search)
+    Prodcuatro
+    .find({title: regex}) 
+    .sort({ _id: -1 })
+    .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
+    .limit(perPage) // output just 9 items
+    .exec((err, prodcuatro) => {
+     Prodcuatro.countDocuments((err, count) => {
+      if (err) return next(err);
+          res.render("prodcuatro/new-prodcuatro",{
+            prodcuatro, 
+            current: page,
+            pages: Math.ceil(count / perPage)
+          });
+        });
+      });
+} else {
+    // Get all campgrounds from DB
+    Prodcuatro.find({}, function(err, prodcuatro){
+       if(err){
+           console.log(err);
+       } else {
+          res.render("produno/new-produno",{
+            prodcuatro,
+            current: page,
+            pages: Math.ceil(count / perPage)
+            });
+       }
+    });
+}
+});
+
+
+/////////////////////////////////////////////////////////////////////
+
+
 
 
 
