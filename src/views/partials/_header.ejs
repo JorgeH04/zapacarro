@@ -83,8 +83,8 @@
                             <div class="col-lg-auto text-center text-lg-left header-item-holder">
                                 
                                 <a href="/shopcart/" class="header-item">
-                                    <% if(session.cart) { %>
-                                    <i class="fas fa-shopping-bag mr-2"></i><span id="header-qty" class="mr-3"><%= session.cart.totalQty%></span>
+                                    
+                                    <i class="fas fa-shopping-bag mr-2"></i><% if(session.cart) { %><span id="header-qty" class="mr-3"><%= session.cart.totalQty%></span>
                                     <% } %>
                                 </a>
                             </div>
