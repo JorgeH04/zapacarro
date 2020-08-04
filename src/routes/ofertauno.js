@@ -40,7 +40,7 @@ router.post('/ofertauno/new-ofertauno',  async (req, res) => {
     //newNote.user = req.user.id;
     await newNote.save();
     req.flash('success_msg', 'Note Added Successfully');
-    res.redirect('/produno/add');
+    res.redirect('/ofertauno/add');
   }
 });
 
@@ -105,7 +105,7 @@ router.get('/ofertauno/edit/:id',  async (req, res) => {
 router.post('/ofertauno/edit/:id',  async (req, res) => {
   const { id } = req.params;
   await Ofertauno.updateOne({_id: id}, req.body);
-  res.redirect('/ofertaunobackend/' + id);
+  res.redirect('/ofertauno/add');
 });
 
 
@@ -134,6 +134,7 @@ router.get('/addtocardofertauno/:id', function(req, res, next){
     cart.add(product, product.id);
     req.session.cart = cart;
     console.log(req.session.cart);
+    req.flash('carro', 'Producto agregado al carro exitosamente');
     res.redirect('/shopcart');
 
   });

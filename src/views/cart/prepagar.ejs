@@ -3,17 +3,81 @@
 
 
 
+<main class="page col-md-12 col-lg-12">
+  <section class="shopping-cart dark">
+    <div class="container">
+         <div class="block-heading">
+           <h2><span class="text">Mis Datos </span> > Envío y Pago</h2>
+         </div>
+         <div class="content">
+        <div class="row">
+          <div class="col-md-12 col-lg-8">
+        
+            <div class="items">
 
-<div class="row mt-5">
-        <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-            <div class="card-footer">
-              <form action="/checkout" method="post">
-                 <button type="submit" class="btn btn-primary btn-lg ">Pagar</button>
-            </form>
+                <div class="card text-center">
+                    <div class="card-header">
+                      <h3>Datos de entrega</h3>
+                    </div>
+                    <div class="card-body">
+                      <form action="/confirmacion" method="POST">
+                        <div class="form-group">
+                          <input type="text" name="name" class="form-control" placeholder="Nombres" required>
+                        </div>
+                       <div class="form-group">
+                          <input type="text" name="number" class="form-control" placeholder="Teléfono" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="fecha" class="form-control" placeholder="Fecha de hoy. Ej: 20/07/2020" required>
+                        </div>
+                        <div class="form-group">
+                          <input type="text" name="address" class="form-control" placeholder="Dirección" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="localidad" class="form-control" placeholder="Localidad" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="piso" class="form-control" placeholder="Piso (opcional)" >
+                        </div>
+                      
+                      
+                        <div class="form-group">
+                          <button class="btn btn-primary btn-block" type="submit">
+                            Continuar
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+         
+                        
+            </div>
           </div>
-        </div>
+          <div class="col-md-12 col-lg-4">
+            <div class="summary">
+              <h3>Detalles de la compra</h3>
+              <% if(products) { %>
+                <% for(var i = 0; i < products.length; i++) { %>
+              <div class="summary-item"><span class="text">Producto <%= i + 1%></span><span class="price"><%= products[i].item.title %></span></div>
+
+              <% } %>    
+
+
+
+              <div class="summary-item mt-5"><span class="text ">Total: </span><span class="price"> <%= total %> </span></div>
+
+              <% } else { %>                    
+
+                <% } %>
+            </div>
+          </div>
+        </div> 
+      </div>
     </div>
+ </section>
+</main>
 
 
 
 
+<% include ../partials/_footer %>      

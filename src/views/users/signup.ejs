@@ -1,41 +1,69 @@
 <% include ../partials/_header %>
 
 
-<div class="row">
-    <div class="col-md-4 mx-auto mt-5 " >
-      <div class="card " style="margin-top: 50px">
-        <div class="card-header">
-          Regístrese ahora
+
+
+
+
+
+<div class="col-12">
+    <!-- Main Content -->
+    <div class="row">
+        <div class="col-12 mt-3 text-center text-uppercase">
+            <h2>          Regístrese ahora
+              </h2>
         </div>
-        <div class="card-body">
-          <form action="/users/signup" method="POST">
-            <div class="form-group">
-              <input type="text" class="form-control" name="name" placeholder="Name" value="">
-            </div>
-            <div class="form-group">
-              <input type="email" class="form-control" name="email" placeholder="Email" value="">
-            </div>
-            <div class="form-group">
-              <input type="password" class="form-control" name="password" placeholder="Password" value="">
-            </div>
-           
-            <div class="form-group">
-              <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" value="">
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" name="direccion" placeholder="Dirección" value="">
-            </div>          
-            <div class="form-group">
-              <input type="text" class="form-control" name="telefono" placeholder="Teléfono" value="">
-            </div>
-            <button class="btn btn-primary btn-block">
-              Signup 
-            </button>
-          </form>
-        </div>
-      </div>
     </div>
-  </div>
+
+    <main class="row">
+        <div class="col-lg-4 col-md-6 col-sm-8 mx-auto bg-white py-3 mb-4">
+            <div class="row">
+                <div class="col-12">
+                    <form action="/users/signup" method="POST">
+                        <div class="form-group">
+                            <label for="email">Name</label>
+                            <input type="text" name="name" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Email</label>
+                            <input type="email" name="email" id="password" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Contraseña</label>
+                            <input type="password" name="password" id="password" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Confirmar Contraseña</label>
+                            <input type="password" name="confirm_password" id="password" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Dirección</label>
+                            <input type="text" name="direccion" id="password" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Teléfono</label>
+                            <input type="text" name="telefono" id="password" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input type="checkbox" id="remember" class="form-check-input">
+                                <label for="remember" class="form-check-label ml-2">Remember Me</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-outline-dark">Registrarse</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </main>
+    <!-- Main Content -->
+</div>
+
+
+
 
 
 

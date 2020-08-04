@@ -7,8 +7,11 @@ const UserSchema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
-  direccion: { type: String, required: true },
-  telefono: { type: Number, required: true },
+  number: { type: String, },
+  fecha: { type: String  },
+  address: { type: String, },
+  localidad: { type: String },
+  piso: { type: String},
   date: { type: Date, default: Date.now }
 });
 

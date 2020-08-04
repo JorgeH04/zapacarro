@@ -112,7 +112,7 @@ router.get('/ofertados/edit/:id',  async (req, res) => {
 router.post('/ofertados/edit/:id',  async (req, res) => {
   const { id } = req.params;
   await Ofertados.updateOne({_id: id}, req.body);
-  res.redirect('/ofertaunobackend/' + id);
+  res.redirect('/ofertados/add');
 });
 
 
@@ -141,6 +141,8 @@ router.get('/addtocardofertados/:id', function(req, res, next){
     cart.add(product, product.id);
     req.session.cart = cart;
     console.log(req.session.cart);
+    req.flash('carro', 'Producto agregado al carro exitosamente');
+
     res.redirect('/shopcart');
 
   });

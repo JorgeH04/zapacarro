@@ -1,158 +1,73 @@
 <% include ../partials/_header %>
 
-<section class="totals py-5">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col text-center text-uppercase">
-              <div class="row">
-                <!-- single column -->
-                <div class="col-10 mx-auto col-md-2">
-                  <p class="text-uppercase">products</p>
-                </div>
-                <!-- end of  single column -->
-                <!-- single column -->
-                <div class="col-10 mx-auto col-md-4">
-                  <p class="text-uppercase">name of products</p>
-                </div>
-                <!-- end of  single column -->
-                <!-- single column -->
-                <div class="col-10 mx-auto col-md-2">
-                  <p class="text-uppercase">price</p>
-                </div>
-                <!-- end of  single column -->
-                <!-- single column -->
-                <div class="col-10 mx-auto col-md-2">
-                  <p class="text-uppercase">quantity</p>
-                </div>
-                <!-- end of  single column -->
-                <!-- single column -->
-                <div class="col-10 mx-auto col-md-2">
-                  <p class="text-uppercase">eliminar</p>
-                </div>
-                <!-- end of  single column -->
-              </div>
-              <!-- end of column -->
-              <hr />
-    
-    
-              <% if(products) { %>
-                <% for(var i = 0; i < products.length; i++) { %>
-              <!-- single product -->
-              <div class="row my-3 align-items-center">
-                <!-- single column -->
-                <div class="col-10 mx-auto col-md-2">
-                  <img
-                    src="<%= products[i].item.image %>"
-                    class="img-fluid"
-                    alt=""
-                  />
-                </div>
-                <!-- end of single column -->
-                <!-- single column -->
-                <div class="col-10 mx-auto col-md-4">
-                  <p> <%= products[i].item.title %> </p>
-                </div>
-                <!-- end of single column -->
-                <!-- single column -->
-                <div class="col-10 mx-auto col-md-2"><p>$<%= products[i].price %></p></div>
-                <!-- end of single column -->
-                <!-- single column -->
-                <div class="col-10 mx-auto col-md-2">
-                  <!-- cart buttons -->
-                  <div class="d-flex justify-content-center align-items-center">
-                    <a href="/reduce/<%= products[i].item._id %>" class="btn btn-black mx-1">-</a>
-                    <span class="btn btn-black mx-1"> <%= products[i].qty %> </span>
-                    <a href="/sumar/<%= products[i].item._id %>" class="btn btn-black mx-1">+</a>
+
+
+<main class="page col-md-12 ">
+  <section class="shopping-cart dark">
+    <div class="container">
+         <div class="block-heading">
+           <h2>Shopping Cart</h2>
+         </div>
+         <div class="content">
+        <div class="row">
+          <div class="col-md-12 col-lg-12">
+            <div class="items">
+               <% if(products) { %>
+                 <% for(var i = 0; i < products.length; i++) { %>										
+              <div class="product">
+                <div class="row">
+                  <div class="col-md-3">
+                    <img class="img-fluid mx-auto d-block image" src="<%= products[i].item.image%>">
                   </div>
-                  <!-- end cart buttons -->
-                </div>
-                <!-- end of single column -->
-                <!-- single column -->
-                <div class="col-10 mx-auto col-md-2">
-                        <a href="/remove/<%= products[i].item._id %>" class="btn btn-danger">Eliminar</a>
-
-                </div>
-
-                <!-- end of single column -->
-              </div>
-              <!-- end of single product -->
-              <% } %>            
-    
-            </tbody>
-            <tfoot>
-            <tr>
-                <th colspan="3" class="text-right">Total</th>
-                <th><%= totalPrice %></th>
-                <th></th>
-            </tr>
-            </tfoot>
-        </table>
-    
-    </div>
-    <div class="col-12 text-right">
-        <button class="btn btn-outline-secondary mr-3" type="submit">Update</button>
-        <a href="#" class="btn btn-outline-success">Checkout</a>
-    </div>
-    </form>
-    </div>
-    </div>
-    </div>
-    
-    <% } else { %>                    
-    
-    <div class="row">
-    <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-    <h2>no items</h2>
-    </div>
-    </div>
-    
-    <% } %>
-    
-    
-    
-              <div class="row">
-                <div
-                  class="col col-sm-6 mx-auto d-flex justify-content-center flex-wrap"
-                >
-                  <button type="button" class="btn btn-black my-2">
-                    continue shopping
-                  </button>
-                  <button type="button" class="btn btn-yellow my-2 ml-2">
-                    checkout
-                  </button>
-                </div>
-              </div>
-              <!-- end o cart buttons -->
-              <div class="row">
-                <div class="col mx-auto my-3 col-sm-8 col-md-6 col-lg-4">
-                  <div class="card card-body bg-secondary text-uppercase">
-                    <div class="card-title text-white"><h6>cart total</h6></div>
-                    <div class="row">
-                      <!-- single row -->
-                      <div class="col-6">sub totoal</div>
-                      <div class="col-6">$900.00</div>
-                      <!-- end of single row -->
-                      <!-- single row -->
-                      <div class="col-6">tax</div>
-                      <div class="col-6">$123.00</div>
-                      <!-- end of single row -->
-                      <!-- single row -->
-                      <div class="col-6">shipping</div>
-                      <div class="col-6">$66.00</div>
-                      <!-- end of single row -->
-                      <!-- single row -->
-                      <div class="col-6 my-3">order total</div>
-                      <div class="col-6 my-3 text-danger">$10.0000</div>
-                      <!-- end of single row -->
+                  <div class="col-md-8">
+                    <div class="info">
+                      <div class="row">
+                        <div class="col-md-5 product-name">
+                          <div class="product-name">
+                            <a href="#"><%= products[i].item.title %> </a>
+                            <div class="product-info">
+                              <div> <a href="/remove/<%= products[i].item._id %>" class="btn btn-link text-danger"><i class="fas fa-trash-alt"></i></a></div>
+                              <div>  <span class="value"> </span></div>
+                              <div>  <span class="value"> </span></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4 quantity">
+                             <label for="quantity">Cantidad:</label>
+                             <div class="container"> <a href="/sumar/<%= products[i].item._id %>" class="btn btn-link text-danger"><i class="fa fa-plus" aria-hidden="true"></i></a></div>
+                             <div class="form-control quantity-input"><%= products[i].qty %> </div>
+                             <div class="container"><a href="/reduce/<%= products[i].item._id %>" class="btn btn-link text-danger"><i class="fa fa-minus" aria-hidden="true"></i></a></div>
+                        </div>
+                        <div class="col-md-3 price">
+                          <span>$<%= products[i].price %></span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <% } %>       
+              
+              <div class="col-md-3 ">
+                  <strong>Total:<%= totalPrice %> </strong>
+              </div>
+              
+              
+              <a href="/prepagar" class="btn btn-primary btn-lg ">Iniciar Compra</a>
+              
+              <% } else { %>                                  
+              <% } %>
+              
+                        
             </div>
           </div>
-        </div>
-      </section>
-      <!-- end of  totals -->
+          
+        </div> 
+      </div>
+    </div>
+ </section>
+</main>
+
 
 
 

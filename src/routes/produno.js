@@ -243,7 +243,7 @@ router.get('/produno/edit/:id',  async (req, res) => {
 router.post('/produno/edit/:id',  async (req, res) => {
   const { id } = req.params;
   await Produno.updateOne({_id: id}, req.body);
-  res.redirect('/produno/add');
+  res.redirect('/produnoback/1');
 });
 
 
@@ -253,8 +253,10 @@ router.post('/produno/edit/:id',  async (req, res) => {
 router.get('/produno/delete/:id', async (req, res) => {
   const { id } = req.params;
     await Produno.deleteOne({_id: id});
-  res.redirect('/produno/add');
+  res.redirect('/produnoback/1');
 });
+
+
 
 
 
@@ -273,19 +275,10 @@ router.get('/addtocardproduno/:id', function(req, res, next){
     cart.add(product, product.id);
     req.session.cart = cart;
     console.log(req.session.cart);
+    req.flash('carro', 'Producto agregado al carro exitosamente');
     res.redirect('/shopcart');
 
   });
-});
-
-
-router.get('/sumar/:id', function(req, res, next){
-  var productId = req.params.id;
-  var cart = new Cart(req.session.cart ? req.session.cart : {});
-
-  cart.sumar(productId);
-  req.session.cart = cart;
-  res.redirect('/shopcart');
 });
 
 router.get('/reduce/:id', function(req, res, next){
@@ -306,6 +299,16 @@ router.get('/remove/:id', function(req, res, next){
   res.redirect('/shopcart');
 });
 
+router.get('/sumar/:id', function(req, res, next){
+  var productId = req.params.id;
+  var cart = new Cart(req.session.cart ? req.session.cart : {});
+
+  cart.sumar(productId);
+  req.session.cart = cart;
+  res.redirect('/shopcart');
+});
+
+
 
 router.get('/shopcart', function (req, res, next){
   if(!req.session.cart){
@@ -316,16 +319,6 @@ router.get('/shopcart', function (req, res, next){
 });
 
 
-
-//router.get('/checkout',isAuthenticated, function (req, res, next){
-  router.get('/checkout', function (req, res, next){
-  var cart = new Cart(req.session.cart);
-  res.render('cart/checkout', {products: cart.generateArray(), total: cart.totalPrice})
-});
-
-
-
-//router.post('/checkout', isAuthenticated, async (req, res, next)=>{  
 
 
 
@@ -345,26 +338,40 @@ router.post('/confirmacion', isAuthenticated, async (req, res, next)=>{
   const order = new Order({
     user: req.user,
     cart: cart,
-    //address: req.body.address,
-    name: req.user.name,
-    direccion: req.user.direccion,
-    telefono: req.user.telefono
-    //timestamp:req.body.timestamp
+    name: req.body.name,
+    number: req.body.number,
+    fecha: req.body.fecha,
+    address: req.body.address,
+    localidad: req.body.localidad,
+    piso: req.body.piso,
 
   });
   console.log(order)
   await order.save();
   req.flash('success_msg', 'Note Added Successfully');
-  res.redirect('/prepagar');
+  res.redirect('/mediodepago');
   
 })
 
 
 router.get('/prepagar', function (req, res, next){
+  if(!req.session.cart){
+    return res.render('/', {products:null})
+  }
   var cart = new Cart(req.session.cart);
   res.render('cart/prepagar', {products: cart.generateArray(), total: cart.totalPrice})
 });
 
+
+
+router.get('/mediodepago', function (req, res, next){
+
+  if(!req.session.cart){
+    return res.render('/', {products:null})
+  }
+  var cart = new Cart(req.session.cart);
+  res.render('cart/mediodepago', {products: cart.generateArray(), total: cart.totalPrice})
+});
 
 
 
@@ -374,15 +381,12 @@ router.post('/checkout',isAuthenticated,  async (req, res) => {
     return res.render('/', {products:null})
  }
  const cart = new Cart(req.session.cart);
-
+ 
   mercadopago.configure({
-      //insert your access_token
-     // access_token: process.env.ACCESS_TOKEN
-     access_token: 'TEST-1727718622428421-041715-2360deef34519752e5bd5f1fca94cdf1-344589484',
-     publicKey: 'TEST-662a163b-afb0-4994-9aea-6be1cca2decd'
-   // access_token: 'APP_USR-1727718622428421-041715-07777da5a8f8451aba826d2727adeadd-344589484',
-     //publicKey: 'APP_USR-9abfa6a9-7a19-45c9-9d13-15edf5baf8f7'
-  
+     //access_token: 'TEST-1727718622428421-041715-2360deef34519752e5bd5f1fca94cdf1-344589484',
+    // publicKey: 'TEST-662a163b-afb0-4994-9aea-6be1cca2decd'
+       access_token: 'APP_USR-1727718622428421-041715-07777da5a8f8451aba826d2727adeadd-344589484',
+     publicKey: 'APP_USR-9abfa6a9-7a19-45c9-9d13-15edf5baf8f7'
   
     });
   
@@ -396,8 +400,7 @@ router.post('/checkout',isAuthenticated,  async (req, res) => {
         }
       ]
     };
-
-   
+     
     mercadopago.preferences
       .create(preference)
       .then(function(response) {
@@ -409,9 +412,9 @@ router.post('/checkout',isAuthenticated,  async (req, res) => {
         res.render("error");
         console.log(error);
       });
-    
-});  
 
+ 
+});  
 
 
 module.exports = router;

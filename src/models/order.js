@@ -4,33 +4,38 @@ const ObjectId = Schema.ObjectId;
 
 const OrderSchema = new Schema({
   user: { 
-  //  type: Schema.Types.ObjectId, 
     type: ObjectId,
-    ref: 'User'},
-
-    cart: {
-      type: Object,
-      required: true
-    },
-   // timestamp: { type: Date, default: Date.now() },
-  // address: {
-   //  type: String,
-   // required: true
-   //},
+    ref: 'User'
+   },
+   cart: {
+     type: Object,
+     required: true
+   
+   },
    name: {
     type: String,
-   required: true
+    // required: true
    },
-   direccion: {
+    number: {
     type: String,
-   required: true
+   // required: true
    },
-   telefono: {
-    type: Number,
-   required: true
+   fecha: {
+   type: String,
+  //  required: true
    },
-   timestamp: { type: Date, default: Date.now() }
-
+    address: {
+    type: String,
+   //  required: true
+   },
+   localidad: {
+   type: String,
+  //  required: true
+ },
+   piso: {
+   type: String,
+//  required: true
+  }
 });
 
 module.exports = mongoose.model('Order', OrderSchema);

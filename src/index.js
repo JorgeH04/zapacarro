@@ -48,15 +48,29 @@ app.use(function(req, res, next){
   next();
 })
 
+
+
+
+
 // Global Variables
 app.use((req, res, next) => {
-    app.locals.format = format;
-    res.locals.success_msg = req.flash('success_msg');
-    res.locals.error_msg = req.flash('error_msg');
-    res.locals.error = req.flash('error');
-    res.locals.user = req.user || null;
-    next();
-  });
+  res.locals.session = req.session;
+  res.locals.carro = req.flash('carro');
+  res.locals.user = req.user || null;
+  next();
+})
+
+
+  // Global Variables
+//app.use((req, res, next) => {
+  //res.locals.signinMessage = req.flash('signinMessage');
+ // res.locals.carro = req.flash('carro');
+ // res.locals.success_msg = req.flash('success_msg');
+//  res.locals.error_msg = req.flash('error_msg');
+ // res.locals.error = req.flash('error');
+ // res.locals.user = req.user || null;
+//  next();
+//});
 
 // routes
 app.use(require('./routes'));
