@@ -41,9 +41,7 @@
                             <div class="col-auto">
                                 <ul class="top-nav">
                                         <% if(user) { %>
-                                    <li>
-                                        <a href="/"><i class="fas fa-user-edit mr-2"></i>Home</a>
-                                    </li>        
+                                         
                                     <li>
                                         <a href="/users/profile"><i class="fas fa-user-edit mr-2"></i>Perfil</a>
                                     </li>
@@ -73,7 +71,7 @@
                         <div class="row">
                             <div class="col-lg-auto">
                                 <div class="site-logo text-center text-lg-left">
-                                    <a href="/"></a>
+                                    <a href="/">Electro Mirenzi SRL</a>
                                 </div>
                             </div>
                          
@@ -112,26 +110,25 @@
                                                 <a class="dropdown-item" href="/prodcincoindex/:1">Projectors</a>
                                             </div>
                                         </li>
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" id="fashion" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Fashion</a>
-                                            <div class="dropdown-menu" aria-labelledby="fashion">
-                                                <a class="dropdown-item" href="category.html">Men's</a>
-                                                <a class="dropdown-item" href="category.html">Women's</a>
-                                                <a class="dropdown-item" href="category.html">Children's</a>
-                                                <a class="dropdown-item" href="category.html">Accessories</a>
-                                                <a class="dropdown-item" href="category.html">Footwear</a>
-                                            </div>
-                                        </li>
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" id="books" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Books</a>
-                                            <div class="dropdown-menu" aria-labelledby="books">
-                                                <a class="dropdown-item" href="category.html">Adventure</a>
-                                                <a class="dropdown-item" href="category.html">Horror</a>
-                                                <a class="dropdown-item" href="category.html">Romantic</a>
-                                                <a class="dropdown-item" href="category.html">Children's</a>
-                                                <a class="dropdown-item" href="category.html">Non-Fiction</a>
-                                            </div>
-                                        </li>
+                                        <% if(user) { %>
+                                          
+                                            <li class="nav-item">
+                                              <a class="nav-link" href="/perfil/1">Perfil</a>
+                                            </li>
+                                            <li class="nav-item">
+                                              <a class="nav-link" href="/users/logout">Logout</a>
+                                            </li>
+                                            <% } else { %>                    
+                                          
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="/users/signin">Login</a>
+                                              </li>
+                                              <li class="nav-item">
+                                                  <a class="nav-link" href="/users/signup">Register</a>
+                                                </li>
+                                             <% } %>
+                                       
+                                        
                                     </ul>
                                 </div>
                             </nav>

@@ -222,7 +222,7 @@ router.get('/proddos/edit/:id',  async (req, res) => {
 router.post('/proddos/edit/:id',  async (req, res) => {
   const { id } = req.params;
   await Proddos.updateOne({_id: id}, req.body);
-  res.redirect('/proddosbackend/' + id);
+  res.redirect('/proddosback/1');
 });
 
 
@@ -232,7 +232,7 @@ router.post('/proddos/edit/:id',  async (req, res) => {
 router.get('/proddos/delete/:id', async (req, res) => {
   const { id } = req.params;
     await Proddos.deleteOne({_id: id});
-  res.redirect('/proddos/add');
+  res.redirect('/proddosback/1');
 });
 
 
