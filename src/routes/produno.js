@@ -13,10 +13,12 @@ const { isAuthenticated } = require('../helpers/auth');
 
 
 
-///////////////////////////////////////////////////////////////////////7
+
+
+////////////////////////////////////////back/////////////////////////////////////////////////////7
 
 router.post('/produno/new-produno',  async (req, res) => {
-  const { name, title, image, imagedos, imagetres, description, price } = req.body;
+  const { name, title, image, imagedos, imagetres, description, oldprice, price, filtroprice, color, colorstock  } = req.body;
   const errors = [];
   if (!image) {
     errors.push({text: 'Please Write a Title.'});
@@ -35,26 +37,84 @@ router.post('/produno/new-produno',  async (req, res) => {
       price
     });
   } else {
-    const newNote = new Produno({ name, title, image, imagedos, imagetres, description, price });
+    const newNote = new Produno({ name, title, image, imagedos, imagetres, description, price, oldprice, filtroprice, color, colorstock  });
     //newNote.user = req.user.id;
     await newNote.save();
     req.flash('success_msg', 'Note Added Successfully');
-    res.redirect('/produnoback/1');
+    res.redirect('/produnoback/:1');
   }
 });
 
 
 
-router.get('/produnoredirect/:id', async (req, res) => {
-  const { id } = req.params;
-  const produno = await Produno.findById(id);
-  res.render('produno/produnoredirect', {produno});
+
+
+router.get('/produnoback/:page', async (req, res) => {
+
+
+  let perPage =12;
+  let page = req.params.page || 1;
+
+  Produno 
+  .find()// finding all documents
+  .sort({_id:-1})
+  .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
+  .limit(perPage) // output just 9 items
+  .exec((err, produno) => {
+    Produno.countDocuments((err, count) => { // count to calculate the number of pages
+      if (err) return next(err);
+      res.render('produno/new-produno', {
+        produno,
+        current: page,
+        pages: Math.ceil(count / perPage)
+      });
+    });
+  });
 });
 
 
 
-////////////////////////////////////////////////////////////////7
 
+
+
+
+
+router.get("/searchback", function(req, res){
+  var noMatch = null;
+  if(req.query.search) {
+      const regex = new RegExp(escape(req.query.search), 'gi');
+      // Get all campgrounds from DB
+      console.log(req.query.search)
+      Produno.find({title: regex}, function(err, produno){
+         if(err){
+             console.log(err);
+         } else {
+            if(produno.length < 1) {
+                noMatch = "No campgrounds match that query, please try again.";
+            }
+            res.render("produno/new-produno",{produno, noMatch: noMatch});
+         }
+      });
+
+  } else {
+      // Get all campgrounds from DB
+      Produno.find({}, function(err, produno){
+         if(err){
+             console.log(err);
+         } else {
+            res.render("produno/produno",{produno, noMatch: noMatch});
+         }
+      });
+  }
+});
+
+
+
+
+
+
+
+/////////////////////////////////////////front//////////////////////////////////////////////////
 
 router.get('/produnoindex/:page', async (req, res) => {
 
@@ -64,7 +124,7 @@ router.get('/produnoindex/:page', async (req, res) => {
 
   Produno 
   .find({}) // finding all documents
-  .sort({ _id: -1 })
+  .sort( {timestamp: -1})
   .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
   .limit(perPage) // output just 9 items
   .exec((err, produno) => {
@@ -83,42 +143,41 @@ router.get('/produnoindex/:page', async (req, res) => {
 
 
 
-router.get("/search", function(req, res){
-  let perPage = 8;
-  let page = req.params.page || 1;
 
+router.get('/produnoredirect/:id', async (req, res) => {
+  const { id } = req.params;
+  const produno = await Produno.findById(id);
+  res.render('produno/produnoredirect', {produno});
+});
+
+
+
+
+
+router.get("/search", function(req, res){
   var noMatch = null;
   if(req.query.search) {
       const regex = new RegExp(escape(req.query.search), 'gi');
       // Get all campgrounds from DB
       console.log(req.query.search)
-      Produno
-      // finding all documents
-      .find({title: regex}) 
-      .sort({ _id: -1 })
-      .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
-      .limit(perPage) // output just 9 items
-      .exec((err, produno) => {
-       Produno.countDocuments((err, count) => {
-        if (err) return next(err);
-            res.render("produno/produno",{
-              produno, 
-              current: page,
-              pages: Math.ceil(count / perPage)
-            });
-          });
-        });
+      Produno.find({title: regex}, function(err, produno){
+         if(err){
+             console.log(err);
+         } else {
+            if(produno.length < 1) {
+                noMatch = "No campgrounds match that query, please try again.";
+            }
+            res.render("produno/produno",{produno, noMatch: noMatch});
+         }
+      });
+
   } else {
       // Get all campgrounds from DB
       Produno.find({}, function(err, produno){
          if(err){
              console.log(err);
          } else {
-            res.render("produno/produno",{
-              produno,
-              current: page,
-              pages: Math.ceil(count / perPage)
-              });
+            res.render("produno/produno",{produno, noMatch: noMatch});
          }
       });
   }
@@ -126,93 +185,164 @@ router.get("/search", function(req, res){
 
 
 
+/////////////////////////////////filter/////////////////////////////////////////////
 
 
 
 
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////////
-router.get('/produnoback/:page', async (req, res) => {
-
+router.post("/filtroprod", function(req, res){
 
   let perPage = 8;
   let page = req.params.page || 1;
 
-  Produno 
-  .find({}) // finding all documents
+  var flrtName = req.body.filtroprod;
+
+  if(flrtName!='' ) {
+
+    var flterParameter={ $and:[{ name:flrtName},
+      {$and:[{},{}]}
+      ]
+       
+    }
+    }else{
+      var flterParameter={}
+  }
+  var produno = Produno.find(flterParameter);
+  produno
+  //.find( flterParameter) 
   .sort({ _id: -1 })
   .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
   .limit(perPage) // output just 9 items
-  .exec((err, produno) => {
-    Produno.countDocuments((err, count) => { // count to calculate the number of pages
-      if (err) return next(err);
-      res.render('produno/new-produno', {
-        produno,
+  .exec((err, data) => {
+    produno.countDocuments((err, count) => {  
+  //.exec(function(err,data){
+      if(err) throw err;
+      res.render("produno/produno",
+      {
+        produno: data, 
         current: page,
         pages: Math.ceil(count / perPage)
+      
       });
     });
   });
 });
 
 
-router.get("/searchback", function(req, res){
+
+
+
+
+
+
+router.post("/filtroprecio", function(req, res){
+
   let perPage = 8;
   let page = req.params.page || 1;
 
-  var noMatch = null;
-  if(req.query.search) {
-      const regex = new RegExp(escape(req.query.search), 'gi');
-      // Get all campgrounds from DB
-      console.log(req.query.search)
-      Produno
-      // finding all documents
-      .find({title: regex}) 
-      .sort({ _id: -1 })
-      .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
-      .limit(perPage) // output just 9 items
-      .exec((err, produno) => {
-       Produno.countDocuments((err, count) => {
-        if (err) return next(err);
-            res.render("produno/new-produno",{
-              produno, 
-              current: page,
-              pages: Math.ceil(count / perPage)
-            });
-          });
-        });
-  } else {
-      // Get all campgrounds from DB
-      Produno.find({}, function(err, produno){
-         if(err){
-             console.log(err);
-         } else {
-            res.render("produno/new-produno",{
-              produno,
-              current: page,
-              pages: Math.ceil(count / perPage)
-              });
-         }
-      });
+  var flrtName = req.body.filtroprice;
+
+  if(flrtName!='' ) {
+
+    var flterParameter={ $and:[{ filtroprice:flrtName},
+      {$and:[{},{}]}
+      ]
+       
+    }
+    }else{
+      var flterParameter={}
   }
+  var produno = Produno.find(flterParameter);
+  produno
+  //.find( flterParameter) 
+  .sort({ _id: -1 })
+  .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
+  .limit(perPage) // output just 9 items
+  .exec((err, data) => {
+    produno.countDocuments((err, count) => {  
+  //.exec(function(err,data){
+      if(err) throw err;
+      res.render("produno/produno",
+      {
+        produno: data, 
+        current: page,
+        pages: Math.ceil(count / perPage)
+      
+      });
+    });
+  });
 });
 
 
-router.get('/produnobackend/:id', async (req, res) => {
-  const { id } = req.params;
-  const produno = await Produno.findById(id);
-   res.render('produno/produnobackend', {produno});
+
+
+
+
+router.post("/filtrocolor", function(req, res){
+
+  let perPage = 8;
+  let page = req.params.page || 1;
+
+  var flrtName = req.body.filtrocolor;
+
+  if(flrtName!='' ) {
+
+    var flterParameter={ $and:[{ color:flrtName},
+      {$and:[{},{}]}
+      ]
+       
+    }
+    }else{
+      var flterParameter={}
+  }
+  var produno = Produno.find(flterParameter);
+  produno
+  //.find( flterParameter) 
+  .sort({ _id: -1 })
+  .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
+  .limit(perPage) // output just 9 items
+  .exec((err, data) => {
+    produno.countDocuments((err, count) => {  
+  //.exec(function(err,data){
+      if(err) throw err;
+      res.render("produno/produno",
+      {
+        produno: data, 
+        current: page,
+        pages: Math.ceil(count / perPage)
+      
+      });
+    });
+  });
 });
 
 
-///////////////////////////////////////////////////////////////////////////7
+
+
+
+
+
+
+
+
+
+
+
+// New product
+//router.get('/produno/add',  async (req, res) => {
+ // const produno = await Produno.find();
+  //res.render('produno/new-produno',  { produno });
+//});
+
+
+
+
+
+
+
+
+
+/////////////////////////////crud//////////////////////////////7
 
 
 

@@ -1,21 +1,96 @@
 <% include ../partials/_header %>
 
+<div class="col-12 ">
+    <header class="row">
+  
+
+        <!-- Header -->
+        <div class="col-12 bg-white pt-4 ">
+            <div class="row">
+                <div class="col-lg-auto">
+                    <div class="site-logo text-center text-lg-left">
+                        <a href="index.html"></a>
+                    </div>
+                </div>
+                <div class="col-lg-5 mx-auto mt-4 mt-lg-0 mt-5">
+                    <form action="/search" method="GET">
+                      <div class="form-group mt-5" >
+                          <div class="input-group">
+                              <input type="text"  name="search" class="form-control border-dark" placeholder="Buscar productos..." required>
+                              <div class="input-group-append">
+                                  <button class="btn btn-outline-dark"><i class="fas fa-search"></i></button>
+                              </div>
+                          </div>
+                      </div>
+                  </form>
+                </div>
+                
+            </div>
+
+            <!-- Nav -->
+            <form action="/filtroprod" method="POST"  accept-charset="utf-8">
+
+            <div class="row">
+
+                <nav class="navbar navbar-expand-lg navbar-light bg-white col-12">
+                    <button class="navbar-toggler d-lg-none border-0" type="button" data-toggle="collapse" data-target="#mainNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="mainNav">
+
+                        <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
+
+                            <div class="container">
+                                <li class="nav-item active">
+                                  <label ><span></span>Filtrar: </label>                           
+                                </li>
+                             </div>
+
+
+                            <div class="container">
+                               <li class="nav-item active">
+                                 <input type="checkbox" id="color0" class="nav-link" value="cuadro"   name="filtroprod" />
+                                 <label ><span></span>Cuadro</label>                           
+                               </li>
+                            </div>
+
+                            <div class="container">
+                               <li class="nav-item active">
+                                 <input type="checkbox" id="color0"  class="nav-link " value="lapicera"   name="filtroprod" />
+                                 <label ><span></span>White</label><br />
+                              </li>
+                            </div>
+
+                          <div class="container">
+                            <li class="nav-item ">
+                                <input type="checkbox" id="color0"  class="nav-link" value="lapicera"   name="filtroprod" />
+                                <label ><span></span>White</label>                              
+                            </li>
+                          </div>
+
+                            <li class="nav-item ">
+                                <input type="submit" name="submit_brand_search" class="btn btn-outline-dark" value="Buscar">
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </nav>
+            </div>
+            <!-- Nav -->
+          </form>
+
+        </div>
+        <!-- Header -->
+
+    </header>
+</div>
+
 
 <div class="col-12">
-        <div class="col-lg-5 mx-auto mt-4 mt-lg-0">
-                
-                    <form action="/search" method="GET">
-                        <div class="form-group" >
-                            <div class="input-group">
-                                <input type="text"  name="search" class="form-control border-dark" placeholder="Search..." required>
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-dark"><i class="fas fa-search"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
 
-            </div>
     <!-- Main Content -->
     <main class="row">
   
@@ -41,7 +116,7 @@
                           <div class="col-12 bg-white text-center h-100 product-item">
                               <div class="row h-100">
                                   <div class="col-12 p-0 mb-3">
-                                      <a href="/prodtresredirect/<%= produn.id %>">
+                                      <a href="/produnoredirect/<%= produn.id %>">
                                           <img src="<%= produn.image %>" class="img-fluid">
                                       </a>
                                   </div>
@@ -49,6 +124,9 @@
                                         <%= produn.title %> 
                                   </div>
                                   <div class="col-12 mb-3">
+                                      <span class="detail-price">
+                                          $2,500
+                                      </span>
                                           <span class="product-price-old">
                                               $<%= produn.price %> 
                                           </span>
@@ -57,6 +135,7 @@
                                   <div class="col-12 mb-3 align-self-end">
                                         <a href="/produnoredirect/<%= produn.id %>" class="btn btn-outline-dark" type="button"><i class="fas fa-cart-plus mr-2"></i>ver detalles</a>
                                   </div>
+                                
                               </div>
                           </div>
                       </div>

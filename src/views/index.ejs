@@ -91,7 +91,7 @@
 				<div class="col-12 py-3">
 					<div class="row">
 						<div class="col-12 text-center text-uppercase">
-							<h2>ültimos</h2>
+							<h2>Ultimos</h2>
 						</div>
 					</div>
 					<div class="row">
@@ -141,53 +141,7 @@
 			<hr>
 		</div>
 
-		<!-- Top Selling Products -->
-		<div class="col-12">
-			<div class="row">
-				<div class="col-12 py-3">
-					<div class="row">
-						<div class="col-12 text-center text-uppercase">
-							<h2>Más Vendidos</h2>
-						</div>
-					</div>
-					<div class="row">
-
-					<% ofertatres.forEach(function (ofertatre) { %>
-						<!-- Product -->
-						<div class="col-lg-3 col-sm-6 my-3">
-							<div class="col-12 bg-white text-center h-100 product-item">
-								<div class="row h-100">
-									<div class="col-12 p-0 mb-3">
-										<a href="/ofertatresredirect/<%= ofertatre.id %>">
-											<img src="<%= ofertatre.image %>" class="img-fluid">
-										</a>
-									</div>
-									<div class="col-12 mb-3">
-										<a href="product.html" class="product-name"><%= ofertatre.title %></a>
-									</div>
-									<div class="col-12 mb-3">
-										
-										<br>
-										<span class="product-price">
-												$<%= ofertatre.price %> 
-										</span>
-									</div>
-									<div class="col-12 mb-3 align-self-end">
-											<a href="/ofertatresredirect/<%= ofertatre.id %>" class="btn btn-outline-dark" type="button"><i class="fas fa-cart-plus mr-2"></i>ver detalles</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- Product -->
-						<% }) %>
-
-
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Top Selling Products -->
-
+	
 		<div class="col-12 py-3 bg-light d-sm-block d-none">
 			<div class="row">
 				<div class="col-lg-3 col ml-auto large-holder">
@@ -221,7 +175,61 @@
 					</div>
 				</div>
 			</div>
+
+
+
+	
+
+
+
 		</div>
+
+					<!-- Top Selling Products -->
+					<div class="col-12">
+						<div class="row">
+							<div class="col-12 py-3">
+								<div class="row">
+									<div class="col-12 text-center text-uppercase">
+										<h2>Más Vendidos</h2>
+									</div>
+								</div>
+								<div class="row">
+			
+								<% ofertatres.forEach(function (ofertatre) { %>
+									<!-- Product -->
+									<div class="col-lg-3 col-sm-6 my-3">
+										<div class="col-12 bg-white text-center h-100 product-item">
+											<div class="row h-100">
+												<div class="col-12 p-0 mb-3">
+													<a href="/ofertatresredirect/<%= ofertatre.id %>">
+														<img src="<%= ofertatre.image %>" class="img-fluid">
+													</a>
+												</div>
+												<div class="col-12 mb-3">
+													<a href="product.html" class="product-name"><%= ofertatre.title %></a>
+												</div>
+												<div class="col-12 mb-3">
+													
+													<br>
+													<span class="product-price">
+															$<%= ofertatre.price %> 
+													</span>
+												</div>
+												<div class="col-12 mb-3 align-self-end">
+														<a href="/ofertatresredirect/<%= ofertatre.id %>" class="btn btn-outline-dark" type="button"><i class="fas fa-cart-plus mr-2"></i>ver detalles</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- Product -->
+									<% }) %>
+			
+			
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Top Selling Products -->
 	</main>
 	<!-- Main Content -->
 </div>
