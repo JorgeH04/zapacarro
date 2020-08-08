@@ -10,16 +10,12 @@ const Cart = require('../models/cart');
 const { isAuthenticated } = require('../helpers/auth');
 
 
+ 
 
-
-////////////////////////////////////////////////////////////////////////////
-
-
-
-
+////////////////////////////////////////back/////////////////////////////////////////////////////7
 
 router.post('/prodcuatro/new-prodcuatro',  async (req, res) => {
-  const { name, title, image, imagedos, imagetres, description, price } = req.body;
+  const { name, title, image, imagedos, imagetres, description, oldprice, price, filtroprice, color, colorstock  } = req.body;
   const errors = [];
   if (!image) {
     errors.push({text: 'Please Write a Title.'});
@@ -38,13 +34,108 @@ router.post('/prodcuatro/new-prodcuatro',  async (req, res) => {
       price
     });
   } else {
-    const newNote = new Prodcuatro({ name, title, image, imagedos, imagetres, description, price });
+    const newNote = new Prodcuatro({ name, title, image, imagedos, imagetres, description, price, oldprice, filtroprice, color, colorstock  });
     //newNote.user = req.user.id;
     await newNote.save();
     req.flash('success_msg', 'Note Added Successfully');
-    res.redirect('/prodcuatroback/1');
+    res.redirect('/prodcuatroback/:1');
   }
 });
+
+
+
+
+
+router.get('/prodcuatroback/:page', async (req, res) => {
+
+
+  let perPage =12;
+  let page = req.params.page || 1;
+
+  Prodcuatro 
+  .find()// finding all documents
+  .sort({_id:-1})
+  .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
+  .limit(perPage) // output just 9 items
+  .exec((err, prodcuatro) => {
+    Prodcuatro.countDocuments((err, count) => { // count to calculate the number of pages
+      if (err) return next(err);
+      res.render('prodcuatro/new-prodcuatro', {
+        prodcuatro,
+        current: page,
+        pages: Math.ceil(count / perPage)
+      });
+    });
+  });
+});
+
+
+
+
+
+
+
+
+router.get("/searchback", function(req, res){
+  var noMatch = null;
+  if(req.query.search) {
+      const regex = new RegExp(escape(req.query.search), 'gi');
+      // Get all campgrounds from DB
+      console.log(req.query.search)
+      Prodcuatro.find({title: regex}, function(err, prodcuatro){
+         if(err){
+             console.log(err);
+         } else {
+            if(prodcuatro.length < 1) {
+                noMatch = "No campgrounds match that query, please try again.";
+            }
+            res.render("prodcuatro/new-prodcuatro",{prodcuatro, noMatch: noMatch});
+         }
+      });
+
+  } else {
+      // Get all campgrounds from DB
+      Prodcuatro.find({}, function(err, prodcuatro){
+         if(err){
+             console.log(err);
+         } else {
+            res.render("prodcuatro/prodcuatro",{prodcuatro, noMatch: noMatch});
+         }
+      });
+  }
+});
+
+
+
+
+
+
+
+/////////////////////////////////////////front//////////////////////////////////////////////////
+
+router.get('/prodcuatroindex/:page', async (req, res) => {
+
+
+  let perPage = 8;
+  let page = req.params.page || 1;
+
+  Prodcuatro 
+  .find({}) // finding all documents
+  .sort( {timestamp: -1})
+  .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
+  .limit(perPage) // output just 9 items
+  .exec((err, prodcuatro) => {
+    Prodcuatro.countDocuments((err, count) => { // count to calculate the number of pages
+      if (err) return next(err);
+      res.render('prodcuatro/prodcuatro', {
+        prodcuatro,
+        current: page,
+        pages: Math.ceil(count / perPage)
+      });
+    });
+  });
+});
+
 
 
 
@@ -60,68 +151,30 @@ router.get('/prodcuatroredirect/:id', async (req, res) => {
 
 
 
-//////////////////////////////////////////////////////////////////////
-
-router.get('/prodcuatroindex/:page', async (req, res) => {
-  let perPage = 8;
-  let page = req.params.page || 1;
-
-  Prodcuatro
-  .find({}) // finding all documents
-  .sort({ timestamp: -1 })
-  .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
-  .limit(perPage) // output just 9 items
-  .exec((err, proddos) => {
-    Prodcuatro.countDocuments((err, count) => { // count to calculate the number of pages
-      if (err) return next(err);
-      res.render('prodcuatro/prodcuatro', {
-        prodcuatro,
-        current: page,
-        pages: Math.ceil(count / perPage)
-      });
-    });
-  });
-});
-
-
-
-
 router.get("/search", function(req, res){
-  let perPage = 8;
-  let page = req.params.page || 1;
-
   var noMatch = null;
   if(req.query.search) {
       const regex = new RegExp(escape(req.query.search), 'gi');
       // Get all campgrounds from DB
       console.log(req.query.search)
-      Prodcuatro
-      // finding all documents
-      .find({title: regex}) 
-      .sort({ _id: -1 })
-      .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
-      .limit(perPage) // output just 9 items
-      .exec((err, prodcuatro) => {
-       Prodcuatro.countDocuments((err, count) => {
-        if (err) return next(err);
-            res.render("prodcuatro/prodcuatro",{
-              prodcuatro, 
-              current: page,
-              pages: Math.ceil(count / perPage)
-            });
-          });
-        });
+      Prodcuatro.find({title: regex}, function(err, prodcuatro){
+         if(err){
+             console.log(err);
+         } else {
+            if(prodcuatro.length < 1) {
+                noMatch = "No campgrounds match that query, please try again.";
+            }
+            res.render("prodcuatro/prodcuatro",{prodcuatro, noMatch: noMatch});
+         }
+      });
+
   } else {
       // Get all campgrounds from DB
       Prodcuatro.find({}, function(err, prodcuatro){
          if(err){
              console.log(err);
          } else {
-            res.render("prodcuatro/prodcuatro",{
-              prodcuatro,
-              current: page,
-              pages: Math.ceil(count / perPage)
-              });
+            res.render("prodcuatro/prodcuatro",{prodcuatro, noMatch: noMatch});
          }
       });
   }
@@ -129,84 +182,146 @@ router.get("/search", function(req, res){
 
 
 
+/////////////////////////////////filter/////////////////////////////////////////////
 
 
 
 
+router.post("/filtroprod", function(req, res){
 
+  let perPage = 8;
+  let page = req.params.page || 1;
 
-//////////////////////////////////////////////////////////////////////
+  var flrtName = req.body.filtroprod;
 
-router.get('/prodcuatroback/:page', async (req, res) => {
-let perPage = 8;
-let page = req.params.page || 1;
+  if(flrtName!='' ) {
 
-Prodcuatro
-.find({}) // finding all documents
-.sort({ timestamp: -1 })
-.skip((perPage * page) - perPage) // in the first page the value of the skip is 0
-.limit(perPage) // output just 9 items
-.exec((err, prodcuatro) => {
-  Prodcuatro.countDocuments((err, count) => { // count to calculate the number of pages
-    if (err) return next(err);
-    res.render('prodcuatro/new-prodcuatro', {
-      prodcuatro,
-      current: page,
-      pages: Math.ceil(count / perPage)
+    var flterParameter={ $and:[{ name:flrtName},
+      {$and:[{},{}]}
+      ]
+       
+    }
+    }else{
+      var flterParameter={}
+  }
+  var prodcuatro = Prodcuatro.find(flterParameter);
+  prodcuatro
+  //.find( flterParameter) 
+  .sort({ _id: -1 })
+  .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
+  .limit(perPage) // output just 9 items
+  .exec((err, data) => {
+    prodcuatro.countDocuments((err, count) => {  
+  //.exec(function(err,data){
+      if(err) throw err;
+      res.render("prodcuatro/prodcuatro",
+      {
+        prodcuatro: data, 
+        current: page,
+        pages: Math.ceil(count / perPage)
+      
+      });
     });
   });
 });
-});
 
 
 
 
-router.get("/searchback", function(req, res){
-let perPage = 8;
-let page = req.params.page || 1;
 
-var noMatch = null;
-if(req.query.search) {
-    const regex = new RegExp(escape(req.query.search), 'gi');
-    // Get all campgrounds from DB
-    console.log(req.query.search)
-    Prodcuatro
-    .find({title: regex}) 
-    .sort({ _id: -1 })
-    .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
-    .limit(perPage) // output just 9 items
-    .exec((err, prodcuatro) => {
-     Prodcuatro.countDocuments((err, count) => {
-      if (err) return next(err);
-          res.render("prodcuatro/new-prodcuatro",{
-            prodcuatro, 
-            current: page,
-            pages: Math.ceil(count / perPage)
-          });
-        });
+
+
+
+router.post("/filtroprecio", function(req, res){
+
+  let perPage = 8;
+  let page = req.params.page || 1;
+
+  var flrtName = req.body.filtroprice;
+
+  if(flrtName!='' ) {
+
+    var flterParameter={ $and:[{ filtroprice:flrtName},
+      {$and:[{},{}]}
+      ]
+       
+    }
+    }else{
+      var flterParameter={}
+  }
+  var prodcuatro = Prodcuatro.find(flterParameter);
+  prodcuatro
+  //.find( flterParameter) 
+  .sort({ _id: -1 })
+  .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
+  .limit(perPage) // output just 9 items
+  .exec((err, data) => {
+    prodcuatro.countDocuments((err, count) => {  
+  //.exec(function(err,data){
+      if(err) throw err;
+      res.render("prodcuatro/prodcuatro",
+      {
+        prodcuatro: data, 
+        current: page,
+        pages: Math.ceil(count / perPage)
+      
       });
-} else {
-    // Get all campgrounds from DB
-    Prodcuatro.find({}, function(err, prodcuatro){
-       if(err){
-           console.log(err);
-       } else {
-          res.render("produno/new-produno",{
-            prodcuatro,
-            current: page,
-            pages: Math.ceil(count / perPage)
-            });
-       }
     });
-}
+  });
 });
 
 
-/////////////////////////////////////////////////////////////////////
 
 
 
 
+router.post("/filtrocolor", function(req, res){
+
+  let perPage = 8;
+  let page = req.params.page || 1;
+
+  var flrtName = req.body.filtrocolor;
+
+  if(flrtName!='' ) {
+
+    var flterParameter={ $and:[{ color:flrtName},
+      {$and:[{},{}]}
+      ]
+       
+    }
+    }else{
+      var flterParameter={}
+  }
+  var prodcuatro = Prodcuatro.find(flterParameter);
+  prodcuatro
+  //.find( flterParameter) 
+  .sort({ _id: -1 })
+  .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
+  .limit(perPage) // output just 9 items
+  .exec((err, data) => {
+    prodcuatro.countDocuments((err, count) => {  
+  //.exec(function(err,data){
+      if(err) throw err;
+      res.render("prodcuatro/prodcuatro",
+      {
+        prodcuatro: data, 
+        current: page,
+        pages: Math.ceil(count / perPage)
+      
+      });
+    });
+  });
+});
+
+
+
+
+
+
+
+
+/////////////////////////////crud//////////////////////////////7
+ 
 
 
 // talle y color
@@ -235,7 +350,7 @@ router.get('/prodcuatro/edit/:id',  async (req, res) => {
 router.post('/prodcuatro/edit/:id',  async (req, res) => {
   const { id } = req.params;
   await Prodcuatro.updateOne({_id: id}, req.body);
-  res.redirect('/prodcuatrobackend/' + id);
+  res.redirect('/prodcuatro/add');
 });
 
 

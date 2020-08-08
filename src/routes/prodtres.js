@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-// Stripe
-//const stripe = require('stripe')('sk_test_rCp23dn4fDasEqfGiVkhHvii00SyEkd4GS');
-
+ 
 
 // Models
 const Prodtres = require('../models/prodtres');
@@ -17,11 +15,11 @@ const { isAuthenticated } = require('../helpers/auth');
 
 
 
-/////////////////////////////////////////////////////////////////////7
 
+////////////////////////////////////////back/////////////////////////////////////////////////////7
 
 router.post('/prodtres/new-prodtres',  async (req, res) => {
-  const { name, title, image, imagedos, imagetres, description, price } = req.body;
+  const { name, title, image, imagedos, imagetres, description, oldprice, price, filtroprice, color, colorstock  } = req.body;
   const errors = [];
   if (!image) {
     errors.push({text: 'Please Write a Title.'});
@@ -40,11 +38,74 @@ router.post('/prodtres/new-prodtres',  async (req, res) => {
       price
     });
   } else {
-    const newNote = new Prodtres({ name, title, image, imagedos, imagetres, description, price });
+    const newNote = new Prodtres({ name, title, image, imagedos, imagetres, description, price, oldprice, filtroprice, color, colorstock  });
     //newNote.user = req.user.id;
     await newNote.save();
     req.flash('success_msg', 'Note Added Successfully');
-    res.redirect('/prodtresback/1');
+    res.redirect('/prodtresback/:1');
+  }
+});
+
+
+
+
+
+router.get('/prodtresback/:page', async (req, res) => {
+
+
+  let perPage =12;
+  let page = req.params.page || 1;
+
+  Prodtres 
+  .find()// finding all documents
+  .sort({_id:-1})
+  .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
+  .limit(perPage) // output just 9 items
+  .exec((err, produno) => {
+    Prodtres.countDocuments((err, count) => { // count to calculate the number of pages
+      if (err) return next(err);
+      res.render('prodtres/new-prodtres', {
+        prodtres,
+        current: page,
+        pages: Math.ceil(count / perPage)
+      });
+    });
+  });
+});
+
+
+
+
+
+
+
+
+router.get("/searchback", function(req, res){
+  var noMatch = null;
+  if(req.query.search) {
+      const regex = new RegExp(escape(req.query.search), 'gi');
+      // Get all campgrounds from DB
+      console.log(req.query.search)
+      Prodtres.find({title: regex}, function(err, prodtres){
+         if(err){
+             console.log(err);
+         } else {
+            if(prodtres.length < 1) {
+                noMatch = "No campgrounds match that query, please try again.";
+            }
+            res.render("prodtres/new-prodtres",{prodtres, noMatch: noMatch});
+         }
+      });
+
+  } else {
+      // Get all campgrounds from DB
+      Prodtres.find({}, function(err, prodtres){
+         if(err){
+             console.log(err);
+         } else {
+            res.render("prodtres/prodtres",{prodtres, noMatch: noMatch});
+         }
+      });
   }
 });
 
@@ -54,21 +115,17 @@ router.post('/prodtres/new-prodtres',  async (req, res) => {
 
 
 
-router.get('/prodtresredirect/:id', async (req, res) => {
-  const { id } = req.params;
-  const prodtres = await Prodtres.findById(id);
-  res.render('prodtres/prodtresredirect', {prodtres});
-});
-//////////////////////////////////////////////////////////////////
-
+/////////////////////////////////////////front//////////////////////////////////////////////////
 
 router.get('/prodtresindex/:page', async (req, res) => {
+
+
   let perPage = 8;
   let page = req.params.page || 1;
 
-  Prodtres
+  Prodtres 
   .find({}) // finding all documents
-  .sort({ timestamp: -1 })
+  .sort( {timestamp: -1})
   .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
   .limit(perPage) // output just 9 items
   .exec((err, prodtres) => {
@@ -85,42 +142,43 @@ router.get('/prodtresindex/:page', async (req, res) => {
 
 
 
-router.get("/search", function(req, res){
-  let perPage = 8;
-  let page = req.params.page || 1;
 
+
+
+router.get('/prodtresredirect/:id', async (req, res) => {
+  const { id } = req.params;
+  const prodtres = await Prodtres.findById(id);
+  res.render('prodtres/prodtresredirect', {prodtres});
+});
+
+
+
+
+
+router.get("/search", function(req, res){
   var noMatch = null;
   if(req.query.search) {
       const regex = new RegExp(escape(req.query.search), 'gi');
       // Get all campgrounds from DB
       console.log(req.query.search)
-      Prodtres
-      // finding all documents
-      .find({title: regex}) 
-      .sort({ _id: -1 })
-      .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
-      .limit(perPage) // output just 9 items
-      .exec((err, produno) => {
-       Prodtres.countDocuments((err, count) => {
-        if (err) return next(err);
-            res.render("prodtres/prodtres",{
-              prodtres, 
-              current: page,
-              pages: Math.ceil(count / perPage)
-            });
-          });
-        });
+      Prodtres.find({title: regex}, function(err, prodtres){
+         if(err){
+             console.log(err);
+         } else {
+            if(prodtres.length < 1) {
+                noMatch = "No campgrounds match that query, please try again.";
+            }
+            res.render("prodtres/prodtres",{prodtres, noMatch: noMatch});
+         }
+      });
+
   } else {
       // Get all campgrounds from DB
       Prodtres.find({}, function(err, prodtres){
          if(err){
              console.log(err);
          } else {
-            res.render("prodtres/prodtres",{
-              prodtres,
-              current: page,
-              pages: Math.ceil(count / perPage)
-              });
+            res.render("prodtres/prodtres",{prodtres, noMatch: noMatch});
          }
       });
   }
@@ -128,79 +186,154 @@ router.get("/search", function(req, res){
 
 
 
+/////////////////////////////////filter/////////////////////////////////////////////
 
 
 
 
-////////////////////////////////////////////////////////////////////7
+router.post("/filtroprod", function(req, res){
 
-
-
-router.get('/prodtresback/:page', async (req, res) => {
   let perPage = 8;
   let page = req.params.page || 1;
 
-  Prodtres
-  .find({}) // finding all documents
-  .sort({ timestamp: -1 })
+  var flrtName = req.body.filtroprod;
+
+  if(flrtName!='' ) {
+
+    var flterParameter={ $and:[{ name:flrtName},
+      {$and:[{},{}]}
+      ]
+       
+    }
+    }else{
+      var flterParameter={}
+  }
+  var prodtres = Prodtres.find(flterParameter);
+  prodtres
+  //.find( flterParameter) 
+  .sort({ _id: -1 })
   .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
   .limit(perPage) // output just 9 items
-  .exec((err, prodtres) => {
-    Prodtres.countDocuments((err, count) => { // count to calculate the number of pages
-      if (err) return next(err);
-      res.render('prodtres/new-prodtres', {
-        prodtres,
+  .exec((err, data) => {
+    prodtres.countDocuments((err, count) => {  
+  //.exec(function(err,data){
+      if(err) throw err;
+      res.render("prodtres/prodtres",
+      {
+        prodtres: data, 
         current: page,
         pages: Math.ceil(count / perPage)
+      
       });
     });
   });
 });
 
 
-router.get("/searchback", function(req, res){
+
+
+
+
+
+
+router.post("/filtroprecio", function(req, res){
+
   let perPage = 8;
   let page = req.params.page || 1;
 
-  var noMatch = null;
-  if(req.query.search) {
-      const regex = new RegExp(escape(req.query.search), 'gi');
-      // Get all campgrounds from DB
-      console.log(req.query.search)
-      Produno
-      // finding all documents
-      .find({title: regex}) 
-      .sort({ _id: -1 })
-      .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
-      .limit(perPage) // output just 9 items
-      .exec((err, produno) => {
-       Produno.countDocuments((err, count) => {
-        if (err) return next(err);
-            res.render("produno/new-produno",{
-              produno, 
-              current: page,
-              pages: Math.ceil(count / perPage)
-            });
-          });
-        });
-  } else {
-      // Get all campgrounds from DB
-      Produno.find({}, function(err, produno){
-         if(err){
-             console.log(err);
-         } else {
-            res.render("produno/new-produno",{
-              produno,
-              current: page,
-              pages: Math.ceil(count / perPage)
-              });
-         }
-      });
+  var flrtName = req.body.filtroprice;
+
+  if(flrtName!='' ) {
+
+    var flterParameter={ $and:[{ filtroprice:flrtName},
+      {$and:[{},{}]}
+      ]
+       
+    }
+    }else{
+      var flterParameter={}
   }
+  var prodtres = Prodtres.find(flterParameter);
+  prodtres
+  //.find( flterParameter) 
+  .sort({ _id: -1 })
+  .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
+  .limit(perPage) // output just 9 items
+  .exec((err, data) => {
+    prodtres.countDocuments((err, count) => {  
+  //.exec(function(err,data){
+      if(err) throw err;
+      res.render("prodtres/prodtres",
+      {
+        prodtres: data, 
+        current: page,
+        pages: Math.ceil(count / perPage)
+      
+      });
+    });
+  });
 });
 
 
-///////////////////////////////////////////////////////////////////////7
+
+
+
+
+router.post("/filtrocolor", function(req, res){
+
+  let perPage = 8;
+  let page = req.params.page || 1;
+
+  var flrtName = req.body.filtrocolor;
+
+  if(flrtName!='' ) {
+
+    var flterParameter={ $and:[{ color:flrtName},
+      {$and:[{},{}]}
+      ]
+       
+    }
+    }else{
+      var flterParameter={}
+  }
+  var prodtres = Prodtres.find(flterParameter);
+  prodtres
+  //.find( flterParameter) 
+  .sort({ _id: -1 })
+  .skip((perPage * page) - perPage) // in the first page the value of the skip is 0
+  .limit(perPage) // output just 9 items
+  .exec((err, data) => {
+    prodtres.countDocuments((err, count) => {  
+  //.exec(function(err,data){
+      if(err) throw err;
+      res.render("prodtres/prodtres",
+      {
+        prodtres: data, 
+        current: page,
+        pages: Math.ceil(count / perPage)
+      
+      });
+    });
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////crud//////////////////////////////7
+
 
 
 // talle y color
@@ -229,7 +362,7 @@ router.get('/prodtres/edit/:id',  async (req, res) => {
 router.post('/prodtres/edit/:id',  async (req, res) => {
   const { id } = req.params;
   await Prodtres.updateOne({_id: id}, req.body);
-  res.redirect('/prodtresbackend/' + id);
+  res.redirect('/prodtres/add');
 });
 
 
