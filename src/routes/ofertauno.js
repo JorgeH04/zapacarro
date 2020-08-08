@@ -17,7 +17,7 @@ const { isAuthenticated } = require('../helpers/auth');
 
 
 router.post('/ofertauno/new-ofertauno',  async (req, res) => {
-  const { name, title, image, imagedos, imagetres, description, price } = req.body;
+  const { name, title, image, imagedos, imagetres, description, oldprice, price, filtroprice, color, colorstock } = req.body;
   const errors = [];
   if (!image) {
     errors.push({text: 'Please Write a Title.'});
@@ -36,7 +36,7 @@ router.post('/ofertauno/new-ofertauno',  async (req, res) => {
       price
     });
   } else {
-    const newNote = new Ofertauno({ name, title, image, imagedos, imagetres, description, price });
+    const newNote = new Ofertauno({ name, title, image, imagedos, imagetres, description, oldprice, price, filtroprice, color, colorstock });
     //newNote.user = req.user.id;
     await newNote.save();
     req.flash('success_msg', 'Note Added Successfully');
@@ -112,10 +112,10 @@ router.post('/ofertauno/edit/:id',  async (req, res) => {
 
 
 // Delete 
-router.get('/notes/delete/:id', async (req, res) => {
+router.get('/ofertauno/delete/:id', async (req, res) => {
   const { id } = req.params;
     await Ofertauno.deleteOne({_id: id});
-  res.redirect('/ofertaunobackend');
+  res.redirect('/ofertauno/add');
 });
 
 

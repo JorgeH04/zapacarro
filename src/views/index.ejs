@@ -41,7 +41,7 @@
 				<div class="col-12 py-3">
 					<div class="row">
 						<div class="col-12 text-center text-uppercase">
-							<h2>Destacados</h2>
+							<h1>Destacados</h1>
 						</div>
 					</div>
 					<div class="row">
@@ -60,10 +60,12 @@
 									</div>
 									<div class="col-12 mb-3">
 										<span class="product-price-old">
-												$<%= ofertaun.price %>  
-										</span>
-										<br>
-										
+											$<%= ofertaun.oldprice %>  
+									   </span>
+									   <br>
+									   <span class="product-price">
+											$<%= ofertaun.price %>  
+									   </span>										
 									</div>
 									<div class="col-12 mb-3 align-self-end">
 										<a href="/ofertaunoredirect/<%= ofertaun.id %>" class="btn btn-outline-dark" type="button"><i class="fas fa-cart-plus mr-2"></i>ver detalles</a>
@@ -91,7 +93,7 @@
 				<div class="col-12 py-3">
 					<div class="row">
 						<div class="col-12 text-center text-uppercase">
-							<h2>Ultimos</h2>
+							<h1>Ultimos</h1>
 						</div>
 					</div>
 					<div class="row">
@@ -111,11 +113,13 @@
 										<a href="product.html" class="product-name"><%= ofertado.title %></a>
 									</div>
 									<div class="col-12 mb-3">
-										
-										<br>
-										<span class="product-price">
-												$<%= ofertado.price %>  
-										</span>
+										<span class="product-price-old">
+											$<%= ofertado.oldprice %>  
+									   </span>
+									   <br>
+									   <span class="product-price">
+											$<%= ofertado.price %>  
+									   </span>
 									</div>
 									<div class="col-12 mb-3 align-self-end">
 											<a href="/ofertadosredirect/<%= ofertado.id %>" class="btn btn-outline-dark" type="button"><i class="fas fa-cart-plus mr-2"></i>ver detalles</a>
@@ -190,7 +194,7 @@
 							<div class="col-12 py-3">
 								<div class="row">
 									<div class="col-12 text-center text-uppercase">
-										<h2>Más Vendidos</h2>
+										<h1>Más Vendidos</h1>
 									</div>
 								</div>
 								<div class="row">
@@ -209,11 +213,13 @@
 													<a href="product.html" class="product-name"><%= ofertatre.title %></a>
 												</div>
 												<div class="col-12 mb-3">
-													
-													<br>
-													<span class="product-price">
-															$<%= ofertatre.price %> 
-													</span>
+													<span class="product-price-old">
+														$<%= ofertatre.oldprice %>  
+												   </span>
+												   <br>
+												   <span class="product-price">
+														$<%= ofertatre.price %>  
+												   </span>
 												</div>
 												<div class="col-12 mb-3 align-self-end">
 														<a href="/ofertatresredirect/<%= ofertatre.id %>" class="btn btn-outline-dark" type="button"><i class="fas fa-cart-plus mr-2"></i>ver detalles</a>

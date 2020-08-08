@@ -16,7 +16,7 @@ const { isAuthenticated } = require('../helpers/auth');
 
 
 router.post('/ofertados/new-ofertados',  async (req, res) => {
-  const { name, title, image, imagedos, imagetres, description, price } = req.body;
+  const { name, title, image, imagedos, imagetres, description, oldprice, price, filtroprice, color, colorstock } = req.body;
   const errors = [];
   if (!image) {
     errors.push({text: 'Please Write a Title.'});
@@ -35,7 +35,7 @@ router.post('/ofertados/new-ofertados',  async (req, res) => {
       price
     });
   } else {
-    const newNote = new Ofertados({ name, title, image, imagedos, imagetres, description, price });
+    const newNote = new Ofertados({ name, title, image, imagedos, imagetres, description, oldprice, price, filtroprice, color, colorstock });
     //newNote.user = req.user.id;
     await newNote.save();
     req.flash('success_msg', 'Note Added Successfully');
